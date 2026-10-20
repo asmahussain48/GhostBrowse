@@ -79,6 +79,7 @@ Beyond page history, some other places also reveal where you have been. Each can
 
 - **Download history:** removes the entries from `chrome://downloads` (the downloaded files stay on disk).
 - **Cache:** clears cached files, which can reveal visited sites, without touching cookies.
+- **Recently closed tabs:** for pages removed while their tab was open (Immediate mode, Ghost Session, Clean Now), also clears them from Chrome's Recent tabs list. In tab-close mode and during cleanups this happens without the option.
 
 ### 2.7 Settings Lock (PIN)
 An optional 4–6 digit PIN protects the settings page and the Keep/Hide lists, since those lists themselves reveal which sites you use. The PIN is stored as a salted SHA-256 hash, never in plain text. This is a deterrent for casual users of a shared computer, not strong security.
@@ -138,8 +139,8 @@ A privacy tool must be clear about what it does not protect. These limitations s
 | **Google account activity** | If "Web & App Activity" is on, Google may keep records at [myactivity.google.com](https://myactivity.google.com). This is server-side and outside the extension's reach. |
 | **Network monitoring** | Employers, universities, ISPs, and routers can log traffic at the network level. |
 | **"On browser close" is not reliable** | Manifest V3 service workers are not guaranteed to run while Chrome shuts down. GhostBrowse cleans on the **next startup** instead, plus periodic cleanup while running. If this matters, use Interval or Immediate mode. |
-| **Recently closed tabs** | Chrome's "Recently closed" list (Ctrl+Shift+T) cannot be edited by extensions. It is cleared when Chrome restarts. |
-| **Chrome Sync** | With Sync on, history is shared across devices. Deletions made through the History API normally sync too, but there can be a delay. |
+| **Recently closed tabs** | Chrome also lists closed tabs under History → Recent tabs (Ctrl+Shift+T) and keeps them across restarts. There is no API to edit that list, but a time-range history deletion also removes the closed tabs from that time. GhostBrowse therefore deletes each visit as a 1 ms range, which clears closed tabs whenever their history still exists (tab-close mode, sweeps, Forget). When a page was removed while its tab was open (Immediate mode, Ghost Session, Clean Now), the optional "Recently closed tabs" setting clears the list with `browsingData.removeHistory` from the tab's last page onward and adds kept pages back, with the time of the cleanup. |
+| **Chrome Sync** | With Sync on, history is shared across devices. Deletions made through the History API normally sync too, but there can be a delay. "Tabs from other devices" shows tabs open elsewhere, which GhostBrowse cannot clean. |
 | **Managed (work/school) Chrome** | Administrators can block extensions or force history saving through policy. GhostBrowse cannot and should not override this. |
 | **Other browser profiles and OS traces** | Other Chrome profiles, other browsers, DNS cache, and OS-level logs are not affected. |
 | **Incognito** | Extensions do not run in Incognito unless allowed, and Incognito does not save history anyway. |

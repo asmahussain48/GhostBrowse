@@ -70,7 +70,7 @@ Upload `dist/ghostbrowse-<version>.zip`, built with `npm run package`.
 | `alarms` | Running scheduled cleanups (Interval mode) and starting and ending Scheduled Ghost Sessions at set times. |
 | `tabs` | "When tab closes" mode must know which pages each tab visited, and the popup shows the site of the current tab. |
 | `downloads` (optional) | Only if the user turns on "Download history" cleaning: erasing entries from the download list. Files on disk are not touched. |
-| `browsingData` (optional) | Only if the user turns on "Cache" cleaning: clearing the cache. Cookies and other data are not touched. |
+| `browsingData` (optional) | Only if the user turns on "Cache" or "Recently closed tabs" cleaning: clearing the cache, or clearing Chrome's list of recently closed tabs (which Chrome only clears together with recent history; kept pages are added back). Cookies and other data are not touched. |
 
 **Remote code:** No, I am not using remote code. All code is included in the package.
 

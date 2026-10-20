@@ -39,7 +39,7 @@ GhostBrowse does not read, modify, or delete cookies, passwords, form data, or w
 | `alarms` | Run interval cleanups and start and end Scheduled Ghost Sessions |
 | `tabs` | Know which pages a tab visited, for "When tab closes" mode, and show the current site in the popup |
 | `downloads` *(optional)* | Remove entries from the download list, only if you turn this on |
-| `browsingData` *(optional)* | Clear the cache, only if you turn this on |
+| `browsingData` *(optional)* | Clear the cache, or Chrome's list of recently closed tabs, only if you turn these on |
 
 ## Removing your data
 

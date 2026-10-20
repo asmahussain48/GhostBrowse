@@ -135,8 +135,8 @@
           <tr><td><strong>Google account activity</strong></td><td>If “Web &amp; App Activity” is on, Google may keep records at myactivity.google.com. This is stored on Google’s servers, outside the extension’s reach.</td></tr>
           <tr><td><strong>Network monitoring</strong></td><td>Employers, universities, internet providers and routers can log traffic at the network level.</td></tr>
           <tr><td><strong>“On browser close” is not reliable</strong></td><td>Chrome does not guarantee that extensions can run while it shuts down. GhostBrowse cleans on the next startup instead. If history must be gone before you walk away, use Immediately or Interval mode, or click Clean Now.</td></tr>
-          <tr><td><strong>Recently closed tabs</strong></td><td>Chrome’s “Recently closed” list (Ctrl+Shift+T) cannot be edited by extensions. Chrome clears it when it restarts.</td></tr>
-          <tr><td><strong>Chrome Sync</strong></td><td>With Sync on, history is shared across devices. Deletions normally sync too, but there can be a delay.</td></tr>
+          <tr><td><strong>Recently closed tabs</strong></td><td>Chrome also lists closed tabs under History → Recent tabs (Ctrl+Shift+T), and keeps them after a restart. GhostBrowse removes them when a tab closes in “When tab closes” mode and during cleanups. If a page was already removed while its tab was open (Immediately mode, a Ghost Session, Clean Now), turn on <strong>Settings → Extra trace cleaning → Recently closed tabs</strong>. Chrome can only clear that list together with recent history, so the sites you keep are added back with the time of the cleanup.</td></tr>
+          <tr><td><strong>Chrome Sync</strong></td><td>With Sync on, history is shared across devices. Deletions normally sync too, but there can be a delay. “Tabs from other devices” shows tabs open on your phone or other computers; GhostBrowse only cleans this browser.</td></tr>
           <tr><td><strong>Managed (work/school) Chrome</strong></td><td>Administrators can block extensions or force history saving through policy. GhostBrowse cannot and should not override this.</td></tr>
           <tr><td><strong>Other profiles and OS traces</strong></td><td>Other Chrome profiles, other browsers, the DNS cache and operating system logs are not affected.</td></tr>
           <tr><td><strong>Incognito</strong></td><td>Incognito does not save history anyway. GhostBrowse ignores Incognito tabs even if you allow it to run there.</td></tr>
@@ -157,6 +157,10 @@
       <details>
         <summary>Clean range says “Nothing to remove”. Is it working?</summary>
         <p>Yes. In Immediately mode (and during a Ghost Session) every page is removed the moment you visit it, so there is usually nothing left for Clean Now or Clean range to find. What remains are pages on your Keep list, which are kept on purpose. The popup message says how many.</p>
+      </details>
+      <details>
+        <summary>Why do closed tabs still show under History → Recent tabs?</summary>
+        <p>That list is separate from your history. GhostBrowse clears it when a tab closes in “When tab closes” mode and during cleanups. In Immediately mode, during a Ghost Session, or after Clean Now, pages are removed while their tab is still open, so turn on <strong>Settings → Extra trace cleaning → Recently closed tabs</strong> as well.</p>
       </details>
       <details>
         <summary>Can I see which sites were removed?</summary>

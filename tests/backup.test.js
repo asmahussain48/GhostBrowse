@@ -36,6 +36,7 @@ describe("createBackup", () => {
         keywords: ["salary"],
         cleanDownloads: false,
         cleanCache: false,
+        cleanRecentlyClosed: false,
         ghostSchedule: DEFAULTS.ghostSchedule,
         profiles: [],
         activeProfile: null,

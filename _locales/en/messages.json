@@ -606,10 +606,10 @@
     "message": "Clears cached files, which can reveal visited sites. Cookies and logins are not affected. Applies to all sites, not just your rules."
   },
   "extraRecent": {
-    "message": "Recently closed tabs (Immediately mode and Ghost Sessions)"
+    "message": "Recently closed tabs"
   },
   "extraRecentHint": {
-    "message": "Also removes closed tabs from Chrome's “Recent tabs” list (History menu, Ctrl+Shift+T). In the other modes this happens automatically. Here Chrome can only clear the list together with recent history, so the sites you keep are added back, showing the time of the cleanup instead of when you visited."
+    "message": "Chrome also lists closed tabs under History → Recent tabs (Ctrl+Shift+T). GhostBrowse removes them by itself when a tab closes in “When tab closes” mode or before a cleanup. When a page was already removed while its tab was open (Immediately mode, a Ghost Session, Clean Now), this option is needed: Chrome only clears the list together with the history since that page, so the sites you keep are added back, showing the time of the cleanup instead of when you visited."
   },
   "noteRecentOff": {
     "message": "Recently closed tabs cleaning was left off; turn it on under Extra trace cleaning to give Chrome's permission."

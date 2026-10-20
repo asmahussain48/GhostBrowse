@@ -73,16 +73,18 @@ function recordRemoved(count) {
   });
 }
 
-// True if a page that must stay in history was visited within [t, t + 1 ms).
-async function keptVisitAt(t, isTarget, s) {
+// True if any page other than the ones being deleted was visited within
+// [t, t + 1 ms). Such a page may have to stay, or stay for now (still open in
+// another tab), so the time range is not used.
+async function otherVisitAt(t, isTarget) {
   const items = await chrome.history.search({ text: "", startTime: t, endTime: t + 1, maxResults: 20 });
-  return items.some((item) => !isTarget(item.url) && !isOwnPage(item.url) && !shouldHide(item.url, s));
+  return items.some((item) => !isTarget(item.url));
 }
 
 // Removes one URL from history. Its recent visits are first deleted as 1 ms
 // time ranges: unlike deleteUrl, a time-range deletion also takes the page off
 // Chrome's "Recently closed" list (History menu, Ctrl+Shift+T). A range is
-// skipped if a page that must stay was visited in the same millisecond.
+// skipped if another page was visited in the same millisecond.
 // Returns false if the URL was not in history.
 async function deleteHistoryUrl(url, s, { windows = true, isTarget = (u) => u === url } = {}) {
   const visits = await chrome.history.getVisits({ url });
@@ -91,7 +93,7 @@ async function deleteHistoryUrl(url, s, { windows = true, isTarget = (u) => u ==
     const recent = visits.map((v) => v.visitTime).filter((t) => t > Date.now() - WINDOW_DAYS * 86400_000)
       .sort((a, b) => a - b).slice(-WINDOW_VISITS);
     for (const t of recent) {
-      if (!(await keptVisitAt(t, isTarget, s))) await chrome.history.deleteRange({ startTime: t, endTime: t + 1 });
+      if (!(await otherVisitAt(t, isTarget))) await chrome.history.deleteRange({ startTime: t, endTime: t + 1 });
     }
   }
   await chrome.history.deleteUrl({ url });
@@ -114,15 +116,15 @@ async function removeUrls(urls, s, { verify = true, windows = true } = {}) {
   return removed;
 }
 
-// Immediate mode and Ghost Sessions delete pages while their tab is still open,
-// so when the tab closes Chrome lists it under "Recently closed" with nothing
-// left in history to delete. Chrome only clears that list together with all
-// history since a time, so (when the user turned this on) the history since the
-// tab's last page is cleared, and pages that must stay are added back first.
-// Chrome cannot add a page back at its original time; it gets the time of now.
-async function clearClosedTab(nav, s) {
-  if (!s.cleanRecentlyClosed || !nav) return;
-  if (!(s.ghostSession || (s.enabled && s.mode === "immediate"))) return;
+// A page removed from history while its tab was still open (Immediate mode, a
+// Ghost Session, a sweep) leaves nothing to delete when the tab closes, so
+// Chrome keeps the tab in its "Recently closed" list. Chrome only clears that
+// list together with all history since a time, so (when the user turned this
+// on) the history since the tab's last page is cleared, and pages that must
+// stay are added back first. Chrome cannot add a page back at its original
+// time; it gets the time of now.
+async function clearClosedTab(nav, s, hadHistory) {
+  if (!s.cleanRecentlyClosed || !nav || hadHistory) return;
   if (!shouldHide(nav.url, s) || !(await hasPermission("browsingData"))) return;
   const since = nav.at - NAV_MARGIN_MS;
   const items = await chrome.history.search({ text: "", startTime: since, maxResults: SEARCH_LIMIT });
@@ -168,18 +170,23 @@ export function cleanSince(startTime) {
     let removed = 0;
     const kept = new Set();
     const skipped = new Set();
+    // GhostBrowse pages open in a tab are removed when their tab closes, which
+    // also takes them off "Recently closed".
+    const { [TAB_URLS]: tabs } = await chrome.storage.session.get({ [TAB_URLS]: {} });
+    const open = new Set(Object.values(tabs).flat());
 
     for (let round = 0; round < 20; round++) {
       const items = await chrome.history.search({ text: "", startTime, endTime, maxResults: SEARCH_LIMIT });
       const hidden = [];
       const own = [];
+      let ownOpen = 0;
       for (const { url } of items) {
-        if (isOwnPage(url)) own.push(url);
+        if (isOwnPage(url)) open.has(url) ? ownOpen++ : own.push(url);
         else if (shouldHide(url, s)) hidden.push(url);
         else (isWebUrl(url) ? kept : skipped).add(url);
       }
       if (hidden.length + own.length === 0) break;
-      if (hidden.length + own.length === items.length) {
+      if (ownOpen === 0 && hidden.length + own.length === items.length) {
         // Nothing in range needs to be kept, so one deleteRange call does the job.
         await chrome.history.deleteRange({ startTime, endTime });
       } else {
@@ -299,6 +306,8 @@ chrome.tabs.onRemoved.addListener(async (tabId) => {
   });
 
   const s = await getSettings();
+  // Checked before anything is deleted: was the tab's page still in history?
+  const hadHistory = Boolean(nav) && (await chrome.history.getVisits({ url: nav.url })).length > 0;
   for (const url of closed.filter((u) => isOwnPage(u) && !stillOpen.has(u))) {
     await deleteHistoryUrl(url, s);   // always, uncounted
   }
@@ -307,7 +316,7 @@ chrome.tabs.onRemoved.addListener(async (tabId) => {
     const urls = [...closed, ...pending].filter((url) => !stillOpen.has(url));
     await recordRemoved(await removeUrls(urls, s));
   }
-  await withCleanup(() => clearClosedTab(nav, s));
+  await withCleanup(() => clearClosedTab(nav, s, hadHistory));
 });
 
 // ---------- Interval mode ----------

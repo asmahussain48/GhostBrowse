@@ -404,11 +404,13 @@ describe("Clean Now and Clean range", () => {
   it("deletes URL by URL when something in range must be kept", async () => {
     await configure({ keepList: ["keep.com"] });
     const spy = vi.spyOn(chrome.history, "deleteRange");
-    chrome.history.record("https://a.com/", Date.now() - MIN);
-    chrome.history.record("https://keep.com/", Date.now() - MIN);
+    chrome.history.record("https://a.com/", Date.now() - 3 * MIN);
+    chrome.history.record("https://keep.com/", Date.now() - 2 * MIN);
     chrome.history.record("chrome://settings/", Date.now() - MIN);
     await chrome.send({ type: "cleanNow" });
-    expect(spy).not.toHaveBeenCalled();
+    // Only 1 ms ranges around a.com's visit, never the whole sweep range.
+    expect(spy.mock.calls.length).toBeGreaterThan(0);
+    for (const [{ startTime, endTime }] of spy.mock.calls) expect(endTime - startTime).toBe(1);
     expect(chrome.history.urls().sort()).toEqual(["chrome://settings/", "https://keep.com/"]);
   });
 
@@ -613,17 +615,21 @@ describe("GhostBrowse's own pages", () => {
   const settingsPage = "chrome-extension://ghostbrowse-test/options/options.html#welcome";
   const helpPage = "chrome-extension://ghostbrowse-test/help/help.html";
 
-  it("removes its Settings page from history as soon as it is visited, without counting it", async () => {
-    await configure({ mode: "onTabClose" });
-    await chrome.history.visit(settingsPage);
+  it("removes its Settings page from history and Recently closed when its tab closes, uncounted", async () => {
+    await configure({ mode: "immediate" });
+    await navigate(4, settingsPage);
+    await closeTab(4);
     expect(chrome.history.has(settingsPage)).toBe(false);
+    expect(chrome.recentlyClosed()).toEqual([]);
     expect(removedToday()).toBe(0);
   });
 
   it("does so even while automatic removal is OFF", async () => {
     await configure({ enabled: false });
-    await chrome.history.visit(helpPage);
+    await navigate(4, helpPage);
+    await closeTab(4);
     expect(chrome.history.has(helpPage)).toBe(false);
+    expect(chrome.recentlyClosed()).toEqual([]);
   });
 
   it("sweeps leftover own pages during a cleanup without counting them", async () => {
@@ -641,6 +647,136 @@ describe("GhostBrowse's own pages", () => {
     expect(await chrome.send({ type: "cleanNow" })).toEqual({ removed: 1, kept: 0, skipped: 0 });
     expect(spy).toHaveBeenCalledTimes(1);
     expect(chrome.history.urls()).toEqual([]);
+  });
+});
+
+describe("Chrome's Recently closed list", () => {
+  it("tab-close mode removes the closed tab from the list too", async () => {
+    await configure({ mode: "onTabClose" });
+    await navigate(1, "https://a.com/", { time: Date.now() - 2000 });
+    await navigate(1, "https://b.com/", { time: Date.now() - 1000 });
+    expect(chrome.history.urls()).toHaveLength(2);
+    await closeTab(1);
+    expect(chrome.history.urls()).toEqual([]);
+    expect(chrome.recentlyClosed()).toEqual([]);
+  });
+
+  it("keeps a kept page in history while clearing the closed tab", async () => {
+    await configure({ mode: "onTabClose", keepList: ["kept.com"] });
+    await navigate(1, "https://kept.com/", { time: Date.now() - 2000 });
+    await navigate(1, "https://hidden.com/", { time: Date.now() - 1000 });
+    await closeTab(1);
+    expect(chrome.history.urls()).toEqual(["https://kept.com/"]);
+    expect(chrome.recentlyClosed()).toEqual([]);
+  });
+
+  it("never deletes a kept page visited in the same millisecond", async () => {
+    await configure({ mode: "onTabClose", keepList: ["kept.com"] });
+    const t = Date.now() - 1000;
+    chrome.history.record("https://kept.com/", t);
+    await navigate(1, "https://hidden.com/", { time: t });
+    await closeTab(1);
+    expect(chrome.history.urls()).toEqual(["https://kept.com/"]);
+  });
+
+  it("interval sweeps clear tabs closed since the last sweep", async () => {
+    await configure({ mode: "interval", intervalMin: 1, keepList: ["kept.com"] });
+    chrome.history.record("https://kept.com/", Date.now() - 3000);
+    await navigate(2, "https://later.com/", { time: Date.now() - 2000 });
+    await closeTab(2);
+    expect(chrome.recentlyClosed()).toEqual(["https://later.com/"]);   // nothing removed yet
+    await chrome.alarms.onAlarm.dispatch({ name: "ghost-clean" });
+    expect(chrome.recentlyClosed()).toEqual([]);
+    expect(chrome.history.urls()).toEqual(["https://kept.com/"]);
+  });
+
+  it("Forget this site also clears its closed tabs", async () => {
+    await configure({ mode: "onStartup" });
+    await navigate(3, "https://forget.me/page", { time: Date.now() - 1000 });
+    await closeTab(3);
+    await chrome.send({ type: "forgetSite", host: "forget.me" });
+    expect(chrome.recentlyClosed()).toEqual([]);
+  });
+
+  it("a page cleaned while its tab was open needs the option once the tab closes", async () => {
+    await configure({ mode: "onStartup", keepList: ["kept.com"] });
+    await navigate(1, "https://open.com/", { time: Date.now() - 2000 });
+    await chrome.send({ type: "cleanNow" });              // removed while the tab is still open
+    await closeTab(1);
+    expect(chrome.recentlyClosed()).toEqual(["https://open.com/"]);
+
+    await chrome.grant("browsingData");
+    await configure({ cleanRecentlyClosed: true });
+    chrome.history.record("https://kept.com/", Date.now() - 500);
+    await navigate(2, "https://open2.com/", { time: Date.now() - 1000 });
+    await chrome.send({ type: "cleanRange", since: 0 });   // covers both visits; kept.com forces URL-by-URL
+    await closeTab(2);
+    expect(chrome.recentlyClosed()).toEqual(["https://open.com/"]);   // only the new one was cleared
+    expect(chrome.history.has("https://kept.com/")).toBe(true);
+  });
+
+  it("an open Settings page survives a sweep and is removed when its tab closes", async () => {
+    const page = "chrome-extension://ghostbrowse-test/options/options.html";
+    await navigate(5, page, { time: Date.now() - 1000 });
+    await chrome.send({ type: "cleanNow" });
+    expect(chrome.history.has(page)).toBe(true);
+    await closeTab(5);
+    expect(chrome.history.has(page)).toBe(false);
+    expect(chrome.recentlyClosed()).toEqual([]);
+  });
+
+  describe("Immediate mode", () => {
+    it("without the option, the closed tab stays in the list (history is already gone)", async () => {
+      await configure({ mode: "immediate" });
+      await navigate(1, "https://a.com/", { time: Date.now() - 1000 });
+      expect(chrome.history.has("https://a.com/")).toBe(false);
+      await closeTab(1);
+      expect(chrome.recentlyClosed()).toEqual(["https://a.com/"]);
+    });
+
+    it("with the option, clears it and adds kept pages back", async () => {
+      await chrome.grant("browsingData");
+      await configure({ mode: "immediate", keepList: ["mail.com"], cleanRecentlyClosed: true });
+      await navigate(1, "https://a.com/", { time: Date.now() - 1000 });
+      await navigate(2, "https://mail.com/inbox", { time: Date.now() - 500 });   // another tab, kept
+      await closeTab(1);
+      expect(chrome.recentlyClosed()).toEqual([]);
+      expect(chrome.history.urls()).toEqual(["https://mail.com/inbox"]);
+    });
+
+    it("leaves the list alone when the tab ended on a kept page", async () => {
+      await chrome.grant("browsingData");
+      await configure({ mode: "immediate", keepList: ["mail.com"], cleanRecentlyClosed: true });
+      const spy = vi.spyOn(chrome.browsingData, "removeHistory");
+      await navigate(1, "https://mail.com/inbox", { time: Date.now() - 1000 });
+      await closeTab(1);
+      expect(spy).not.toHaveBeenCalled();
+      expect(chrome.history.has("https://mail.com/inbox")).toBe(true);
+    });
+
+    it("also works during a Ghost Session in another mode", async () => {
+      await chrome.grant("browsingData");
+      await configure({ mode: "onTabClose", cleanRecentlyClosed: true });
+      await chrome.send({ type: "startGhost" });
+      await flush();
+      await navigate(1, "https://secret.com/", { time: Date.now() - 1000 });
+      await closeTab(1);
+      expect(chrome.recentlyClosed()).toEqual([]);
+    });
+
+    it("does nothing without the permission", async () => {
+      await configure({ mode: "immediate", cleanRecentlyClosed: true });
+      await navigate(1, "https://a.com/", { time: Date.now() - 1000 });
+      await closeTab(1);
+      expect(chrome.recentlyClosed()).toEqual(["https://a.com/"]);
+    });
+
+    it("turns off when the permission is revoked", async () => {
+      await chrome.grant("browsingData");
+      await configure({ cleanRecentlyClosed: true, cleanCache: true });
+      await chrome.permissions.onRemoved.dispatch({ permissions: ["browsingData"] });
+      expect(local()).toMatchObject({ cleanRecentlyClosed: false, cleanCache: false });
+    });
   });
 });
 

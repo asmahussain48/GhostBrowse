@@ -88,7 +88,8 @@ try {
   const history = () => call(() => chrome.history.search({ text: "", startTime: 0, maxResults: 1000 }).then((r) => r.map((i) => i.url)));
   const inHistory = async (url) => (await history()).includes(url);
 
-  check("background set the cleanup cursor on install", (await waitFor(() => call(() => chrome.storage.local.get("lastCleanup").then((s) => s.lastCleanup > 0)))) === true);
+  // A freshly downloaded Firefox can take a while on its first start.
+  check("background set the cleanup cursor on install", (await waitFor(() => call(() => chrome.storage.local.get("lastCleanup").then((s) => s.lastCleanup > 0)), 30000)) === true);
 
   // ---- Tab-close mode (default) ----
   const tab = await browser.newPage();

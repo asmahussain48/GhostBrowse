@@ -150,6 +150,20 @@ async function launch({ extension = ROOT, profile = fs.mkdtempSync(path.join(os.
   return x;
 }
 
+// A copy of the extension with extra permissions: optional ones granted up front
+// (headless Chrome cannot click a permission prompt) and, for checks only, more.
+function extensionCopy(extra = []) {
+  const copy = fs.mkdtempSync(path.join(os.tmpdir(), "gb-copy-"));
+  for (const item of ["manifest.json", "background.js", "lib", "popup", "options", "help", "styles", "icons", "_locales"]) {
+    fs.cpSync(path.join(ROOT, item), path.join(copy, item), { recursive: true });
+  }
+  const manifest = JSON.parse(fs.readFileSync(path.join(copy, "manifest.json"), "utf8"));
+  manifest.permissions.push(...manifest.optional_permissions, ...extra);
+  delete manifest.optional_permissions;
+  fs.writeFileSync(path.join(copy, "manifest.json"), JSON.stringify(manifest));
+  return copy;
+}
+
 async function resultText(page) {
   return waitFor(() => page.$eval("#result", (e) => (e.textContent && e.textContent !== "Working…" ? e.textContent : "")));
 }
@@ -260,16 +274,7 @@ const scenarios = {
 
   // Logins survive cleanups; download list and cache cleaning.
   async realWorld() {
-    // Headless Chrome cannot click a permission prompt, so this copy has the
-    // optional permissions granted up front. The code under test is the same.
-    const copy = fs.mkdtempSync(path.join(os.tmpdir(), "gb-perms-"));
-    for (const item of ["manifest.json", "background.js", "lib", "popup", "options", "help", "styles", "icons", "_locales"]) {
-      fs.cpSync(path.join(ROOT, item), path.join(copy, item), { recursive: true });
-    }
-    const manifest = JSON.parse(fs.readFileSync(path.join(copy, "manifest.json"), "utf8"));
-    manifest.permissions.push(...manifest.optional_permissions);
-    delete manifest.optional_permissions;
-    fs.writeFileSync(path.join(copy, "manifest.json"), JSON.stringify(manifest));
+    const copy = extensionCopy();
 
     const downloads = fs.mkdtempSync(path.join(os.tmpdir(), "gb-dl-"));
     const onDisk = (name) => fs.existsSync(path.join(downloads, `${name}.bin`));
@@ -309,6 +314,72 @@ const scenarios = {
       await sleep(1500);
       check("Keep list applies to downloads", await listed(x, "file3"));
       check("login cookie survived everything", (await x.browser.cookies()).some((c) => c.name === "session"));
+    } finally {
+      await x.browser.close();
+    }
+  },
+
+  // Chrome's "Recently closed" list (History menu → Recent tabs, Ctrl+Shift+T).
+  async recentlyClosed() {
+    // "sessions" is only in this test copy, to read the list.
+    const x = await launch({ extension: extensionCopy(["sessions"]) });
+    const closedList = () => x.sw.evaluate(() => chrome.sessions.getRecentlyClosed().then((l) => l.map((e) => (e.tab ? e.tab.url : "window"))));
+    const listed = async (url) => (await closedList()).includes(url);
+    const closeAfter = async (urls) => {
+      const tab = await x.browser.newPage();
+      for (const u of urls) await tab.goto(u);
+      await waitFor(() => x.history().then(() => true));
+      await sleep(300);
+      await tab.close();
+      await sleep(300);
+    };
+    try {
+      await waitFor(async () => (await x.get()).lastCleanup > 0);
+
+      // Default mode: when tab closes.
+      await closeAfter([A("/rc-one"), A("/rc-two")]);
+      check("tab-close mode: closed tab is gone from Recently closed",
+        (await waitFor(async () => !(await listed(A("/rc-two"))) && !(await x.inHistory(A("/rc-two"))))) === true, JSON.stringify(await closedList()));
+
+      // Immediate mode without the option: the documented limitation.
+      await x.set({ mode: "immediate" });
+      await sleep(300);
+      await closeAfter([A("/rc-immediate")]);
+      await waitFor(async () => !(await x.inHistory(A("/rc-immediate"))));
+      check("Immediate mode without the option: history gone, closed tab still listed", await waitFor(() => listed(A("/rc-immediate"))) === true);
+
+      // Immediate mode with the option: cleared, kept page survives.
+      await x.set({ cleanRecentlyClosed: true, keepList: ["localhost"] });
+      await sleep(300);
+      const keptTab = await x.browser.newPage();
+      await keptTab.goto(L("/rc-kept"));
+      await closeAfter([A("/rc-secret")]);
+      check("Immediate mode with the option: closed tab removed from the list",
+        (await waitFor(async () => !(await listed(A("/rc-secret"))))) === true, JSON.stringify(await closedList()));
+      check("…and the kept page is still in history", await waitFor(() => x.inHistory(L("/rc-kept"))) === true);
+      await keptTab.close();
+
+      // Clean Now with a Keep list uses the URL-by-URL path.
+      await x.set({ mode: "onStartup", cleanRecentlyClosed: false });
+      await sleep(300);
+      await closeAfter([L("/rc-kept-2"), A("/rc-later")]);
+      check("closed tab listed until the next cleanup (restart mode)", await waitFor(() => listed(A("/rc-later"))) === true);
+      const popup = await x.popup();
+      await popup.click("#cleanNow");
+      await resultText(popup);
+      check("Clean Now removes it from Recently closed", (await waitFor(async () => !(await listed(A("/rc-later"))))) === true, JSON.stringify(await closedList()));
+      check("…without touching the kept page", await x.inHistory(L("/rc-kept-2")));
+      await popup.close();
+
+      // GhostBrowse's own Settings page leaves no trace once its tab closes.
+      const opt = await x.options();
+      await sleep(500);
+      await opt.close();
+      const ownGone = await waitFor(async () => {
+        const urls = [...(await closedList()), ...(await x.history())];
+        return !urls.some((u) => u.startsWith(x.base));
+      });
+      check("own Settings page gone from history and Recently closed", ownGone === true, JSON.stringify(await closedList()));
     } finally {
       await x.browser.close();
     }
