@@ -1,0 +1,39 @@
+{
+  "manifest_version": 3,
+  "name": "__MSG_extName__",
+  "version": "1.1.0",
+  "description": "__MSG_extDescription__",
+  "default_locale": "en",
+  "minimum_chrome_version": "116",
+  "permissions": ["history", "storage", "alarms", "tabs"],
+  "optional_permissions": ["downloads", "browsingData"],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_title": "GhostBrowse",
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png"
+    }
+  },
+  "options_page": "options/options.html",
+  "commands": {
+    "clean-now": {
+      "suggested_key": { "default": "Alt+Shift+D" },
+      "description": "__MSG_cmdCleanNow__"
+    },
+    "toggle-ghost": {
+      "suggested_key": { "default": "Alt+Shift+G" },
+      "description": "__MSG_cmdToggleGhost__"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}

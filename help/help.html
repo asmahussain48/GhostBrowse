@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GhostBrowse Help</title>
+  <link rel="icon" href="../icons/icon32.png">
+  <link rel="stylesheet" href="../styles/theme.css">
+  <link rel="stylesheet" href="help.css">
+</head>
+<body>
+  <header class="hero">
+    <img src="../icons/icon128.png" width="72" height="72" alt="">
+    <div>
+      <h1>GhostBrowse Help</h1>
+      <p>Automatic history removal for Chrome, without logging you out.</p>
+    </div>
+  </header>
+
+  <nav class="toc" aria-label="On this page">
+    <a href="#what">What it removes</a>
+    <a href="#modes">Cleanup modes</a>
+    <a href="#rules">Site rules</a>
+    <a href="#site">This site</a>
+    <a href="#profiles">Profiles</a>
+    <a href="#ghost">Ghost Session</a>
+    <a href="#shortcuts">Shortcuts</a>
+    <a href="#limits">Limitations</a>
+    <a href="#faq">FAQ</a>
+    <a href="#privacy">Privacy</a>
+    <a href="../options/options.html">Settings →</a>
+    <a href="help.ur.html" lang="ur" dir="rtl">اردو</a>
+  </nav>
+
+  <main>
+    <section id="what">
+      <h2>What GhostBrowse removes and keeps</h2>
+      <div class="split">
+        <div class="panel keep">
+          <h3>✅ Keeps</h3>
+          <ul>
+            <li>Login sessions and cookies</li>
+            <li>Saved passwords</li>
+            <li>Autofill and addresses</li>
+            <li>Bookmarks</li>
+            <li>Extensions and their data</li>
+            <li>Site settings and permissions</li>
+            <li>Local storage of websites</li>
+          </ul>
+        </div>
+        <div class="panel remove">
+          <h3>❌ Removes</h3>
+          <ul>
+            <li>Visited pages in <code>chrome://history</code></li>
+            <li>“Most visited” suggestions built from history</li>
+            <li>Address bar suggestions built from history</li>
+            <li>Download list entries <em>(optional)</em></li>
+            <li>Cached files <em>(optional)</em></li>
+          </ul>
+        </div>
+      </div>
+      <p>GhostBrowse does not even ask for permission to read cookies, so it cannot sign you out of anything.</p>
+    </section>
+
+    <section id="modes">
+      <h2>Cleanup modes</h2>
+      <table>
+        <thead><tr><th>Mode</th><th>When history is removed</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Immediately</strong></td><td>As soon as a page is recorded in history.</td></tr>
+          <tr><td><strong>When tab closes</strong></td><td>When the tab that visited the page is closed. A page that is also open in another tab is removed when that tab closes too.</td></tr>
+          <tr><td><strong>Interval</strong></td><td>Every 1, 5, 10, or 30 minutes.</td></tr>
+          <tr><td><strong>On browser restart</strong></td><td>The next time Chrome starts. See <a href="#limits">Limitations</a> for why this is not “on close”.</td></tr>
+        </tbody>
+      </table>
+      <p>In every mode, GhostBrowse also sweeps leftovers when Chrome starts, which catches anything missed because of a crash or a forced close.</p>
+      <p><strong>Clean Now</strong> removes everything recorded since the last cleanup. <strong>Clean range</strong> (last hour, today, last 7 days, all time) also covers history from before GhostBrowse was installed. Both follow your site rules and work even when automatic removal is off.</p>
+    </section>
+
+    <section id="rules">
+      <h2>Site rules</h2>
+      <ul>
+        <li><strong>Hide everything, except the Keep list</strong> (default). For example, keep <code>gmail.com</code>, <code>github.com</code>, <code>university.edu</code>.</li>
+        <li><strong>Hide only the Hide list.</strong> For example, hide <code>youtube.com</code>, <code>instagram.com</code>, <code>reddit.com</code>.</li>
+      </ul>
+      <p>A rule covers the domain and all its subdomains, so <code>google.com</code> also covers <code>mail.google.com</code>, but not <code>notgoogle.com</code>. The Keep list always wins over the Hide list and over a Ghost Session.</p>
+      <p><strong>Hide keywords</strong> extend the Hide list: any page whose address contains one of the words or phrases is removed, on any site. For example, <code>salary</code> removes <code>google.com/search?q=salary+negotiation</code>. Matching ignores case, and spaces, dashes, underscores and <code>+</code> count as the same, so <code>job search</code> also matches <code>job-search</code>. Keywords need at least 3 characters and only look at the page address, not its title or content. Like the Hide list, they are used in “Hide only the Hide list” mode, and the Keep list still wins.</p>
+      <p>Internal pages such as <code>chrome://settings</code> and local <code>file://</code> pages are never touched. GhostBrowse’s own Settings and Help pages are always removed from history, so they do not reveal that you use it.</p>
+    </section>
+
+    <section id="site">
+      <h2>This site</h2>
+      <p>The toolbar popup shows the site of the page you are on and says what GhostBrowse will do with it, for example “Removed from history when its tab closes” or “Stays in history: on your Keep list”.</p>
+      <ul>
+        <li><strong>Keep</strong> adds the site to your Keep list (or <strong>Stop keeping</strong> removes it).</li>
+        <li><strong>Hide</strong> adds it to your Hide list. It only appears in “Hide only the Hide list” mode.</li>
+        <li><strong>Forget</strong> removes every history entry for the site and its subdomains, from all time, even if the site is on your Keep list. It takes a second click to confirm.</li>
+      </ul>
+      <p>Keep and Hide change your lists, so they ask for your PIN if one is set. Forget only removes history, so it does not.</p>
+    </section>
+
+    <section id="profiles">
+      <h2>Rule profiles</h2>
+      <p>A profile is a named set of rules: the rule mode, Keep list, Hide list and keywords. For example, a <strong>Study</strong> profile could keep your university sites, while a <strong>Personal</strong> profile hides everything.</p>
+      <p>Create one in Settings → Site rules → <strong>Save as new profile</strong>. Changes you make to the rules are saved to the selected profile. With two or more profiles, a profile picker appears in the toolbar popup. Switching profiles asks for your PIN if one is set.</p>
+    </section>
+
+    <section id="ghost">
+      <h2>Ghost Session</h2>
+      <p>Click <strong>Start Ghost Session</strong> in the toolbar popup for a period where everything you visit is removed immediately, whatever your normal mode and rules (except the Keep list). The toolbar icon shows 👻 while it is active. When you click <strong>End Ghost Session</strong>, a final sweep removes anything recorded between start and end.</p>
+      <p>A Ghost Session keeps running across browser restarts until you end it.</p>
+      <h3>Scheduled Ghost Sessions</h3>
+      <p>In Settings → <strong>Scheduled Ghost Session</strong>, choose days and a time window, for example weekdays 09:00–17:00 on an office computer. GhostBrowse starts a Ghost Session when the window opens and ends it, with the final sweep, when it closes. Windows can run overnight, such as 22:00–06:00. If Chrome is closed when a window ends, the session is ended the next time Chrome starts. If you end a scheduled session by hand, it stays off until the next window. A session you started yourself is never ended by the schedule.</p>
+    </section>
+
+    <section id="shortcuts">
+      <h2>Keyboard shortcuts</h2>
+      <table>
+        <thead><tr><th>Keys</th><th>Action</th></tr></thead>
+        <tbody>
+          <tr><td><kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>D</kbd></td><td><strong>Clean Now.</strong> The toolbar badge briefly shows how many entries were removed (✓ when there was nothing to remove). Hover over the icon for details.</td></tr>
+          <tr><td><kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>G</kbd></td><td><strong>Start or end a Ghost Session.</strong> The 👻 badge shows while it is active.</td></tr>
+        </tbody>
+      </table>
+      <p>These are the default keys. If Chrome or another extension already uses one, Chrome leaves it unset. Change them at <code>chrome://extensions/shortcuts</code>, or from <strong>Settings → Keyboard shortcuts</strong>.</p>
+    </section>
+
+    <section id="limits">
+      <h2>What GhostBrowse cannot do</h2>
+      <p>A privacy tool must be clear about what it does not protect.</p>
+      <table>
+        <thead><tr><th>Limitation</th><th>Explanation</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Websites still know you visited</strong></td><td>You are logged in, so YouTube, Facebook, Amazon and others record your activity in your account. GhostBrowse only cleans the local browser.</td></tr>
+          <tr><td><strong>Google account activity</strong></td><td>If “Web &amp; App Activity” is on, Google may keep records at myactivity.google.com. This is stored on Google’s servers, outside the extension’s reach.</td></tr>
+          <tr><td><strong>Network monitoring</strong></td><td>Employers, universities, internet providers and routers can log traffic at the network level.</td></tr>
+          <tr><td><strong>“On browser close” is not reliable</strong></td><td>Chrome does not guarantee that extensions can run while it shuts down. GhostBrowse cleans on the next startup instead. If history must be gone before you walk away, use Immediately or Interval mode, or click Clean Now.</td></tr>
+          <tr><td><strong>Recently closed tabs</strong></td><td>Chrome’s “Recently closed” list (Ctrl+Shift+T) cannot be edited by extensions. Chrome clears it when it restarts.</td></tr>
+          <tr><td><strong>Chrome Sync</strong></td><td>With Sync on, history is shared across devices. Deletions normally sync too, but there can be a delay.</td></tr>
+          <tr><td><strong>Managed (work/school) Chrome</strong></td><td>Administrators can block extensions or force history saving through policy. GhostBrowse cannot and should not override this.</td></tr>
+          <tr><td><strong>Other profiles and OS traces</strong></td><td>Other Chrome profiles, other browsers, the DNS cache and operating system logs are not affected.</td></tr>
+          <tr><td><strong>Incognito</strong></td><td>Incognito does not save history anyway. GhostBrowse ignores Incognito tabs even if you allow it to run there.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="faq">
+      <h2>FAQ</h2>
+      <details>
+        <summary>Will GhostBrowse log me out of websites?</summary>
+        <p>No. It never touches cookies, local storage, passwords or autofill, and it does not have permission to.</p>
+      </details>
+      <details>
+        <summary>Why are some pages still in my history?</summary>
+        <p>Common reasons: the site is on your Keep list; you use “Hide only the Hide list” and the site is not listed; the page is still open in a tab (When tab closes mode); the page was visited before GhostBrowse was installed (use Clean range); or automatic removal is turned off. After Clean Now or Clean range, the popup tells you how many pages stayed and why.</p>
+      </details>
+      <details>
+        <summary>Clean range says “Nothing to remove”. Is it working?</summary>
+        <p>Yes. In Immediately mode (and during a Ghost Session) every page is removed the moment you visit it, so there is usually nothing left for Clean Now or Clean range to find. What remains are pages on your Keep list, which are kept on purpose. The popup message says how many.</p>
+      </details>
+      <details>
+        <summary>Can I see which sites were removed?</summary>
+        <p>No, by design. GhostBrowse only counts removed entries. A list of removed sites would defeat the purpose of the extension.</p>
+      </details>
+      <details>
+        <summary>What happens to pages visited before I installed GhostBrowse?</summary>
+        <p>They stay until you remove them. Open the popup, choose a time range such as “Today” or “All time”, and click Clean range. Your Keep list is respected.</p>
+      </details>
+      <details>
+        <summary>I forgot my PIN. What now?</summary>
+        <p>Remove GhostBrowse from <code>chrome://extensions</code> and install it again. This clears the PIN along with all settings and lists. Your browser history, logins and bookmarks are not affected.</p>
+      </details>
+      <details>
+        <summary>How do I move my settings to another computer?</summary>
+        <p>Open Settings → Back up settings → Export to file, then use Import from file on the other computer. You see a summary before anything changes. The file contains your lists and keywords, so keep it private. It never contains your PIN or statistics. If the file turns on download or cache cleaning, turn that option on again yourself so Chrome can ask for permission.</p>
+      </details>
+      <details>
+        <summary>Can I use GhostBrowse in Urdu?</summary>
+        <p>Yes. GhostBrowse follows Chrome’s language, and you can also choose English or Urdu (اردو) at the top of the Settings page. This help page is also available <a href="help.ur.html">in Urdu</a>.</p>
+      </details>
+      <details>
+        <summary>How strong is the PIN?</summary>
+        <p>It keeps casual users of a shared computer out of your settings and lists. It is stored as a salted SHA-256 hash, and repeated wrong guesses cause a lockout. Someone with technical skills and access to your computer could still reset it, so do not rely on it as strong security.</p>
+      </details>
+      <details>
+        <summary>Does GhostBrowse slow down browsing?</summary>
+        <p>No. It only reacts to history events and does no work while pages load. Large cleanups (thousands of entries) finish in a few seconds.</p>
+      </details>
+      <details>
+        <summary>Which browsers are supported?</summary>
+        <p>Chrome 116 or newer, and other Chromium browsers such as Edge, Brave and Opera. Their own history features may behave slightly differently.</p>
+      </details>
+    </section>
+
+    <section id="privacy">
+      <h2>Privacy</h2>
+      <ul>
+        <li>GhostBrowse <strong>does not collect, transmit, or sell any data</strong>. It makes no network requests.</li>
+        <li>Settings and counters are stored locally on your device.</li>
+        <li><strong>Removed URLs are never stored</strong>, logged, or displayed.</li>
+        <li>The Keep and Hide lists stay on your device and can be protected with a PIN.</li>
+        <li>GhostBrowse does not read, modify, or delete cookies, passwords, or form data.</li>
+        <li>Uninstalling the extension deletes all its stored data.</li>
+      </ul>
+    </section>
+
+    <section id="responsible">
+      <h2>Responsible use</h2>
+      <p>GhostBrowse is built for personal privacy on shared devices. It is not designed to bypass monitoring on devices you do not own or manage. On work or school computers, follow your organization’s IT policies.</p>
+    </section>
+  </main>
+
+  <footer class="foot">Made with 👻 for people who share computers.</footer>
+</body>
+</html>

@@ -1,0 +1,791 @@
+{
+  "extName": {
+    "message": "GhostBrowse"
+  },
+  "extDescription": {
+    "message": "لاگ ان برقرار رکھتے ہوئے براؤزنگ ہسٹری خودبخود حذف کرتا ہے۔"
+  },
+  "cmdCleanNow": {
+    "message": "ابھی صاف کریں: پچھلی صفائی کے بعد کی ہسٹری حذف کریں"
+  },
+  "cmdToggleGhost": {
+    "message": "گھوسٹ سیشن شروع یا ختم کریں"
+  },
+  "badgeOn": {
+    "message": "آن"
+  },
+  "badgeOff": {
+    "message": "آف"
+  },
+  "badgeGhost": {
+    "message": "👻"
+  },
+  "badgeOnTitle": {
+    "message": "GhostBrowse آن ہے"
+  },
+  "badgeOffTitle": {
+    "message": "GhostBrowse آف ہے"
+  },
+  "badgeGhostTitle": {
+    "message": "GhostBrowse: گھوسٹ سیشن جاری ہے"
+  },
+  "flashTitle": {
+    "message": "GhostBrowse: $1"
+  },
+  "errInvalidRange": {
+    "message": "وقت کی مدت درست نہیں۔"
+  },
+  "errInvalidSite": {
+    "message": "یہ ایسی ویب سائٹ نہیں جسے GhostBrowse بھلا سکے۔"
+  },
+  "errGeneric": {
+    "message": "کچھ غلط ہو گیا۔"
+  },
+  "modeImmediate": {
+    "message": "فوراً"
+  },
+  "modeOnTabClose": {
+    "message": "ٹیب بند ہونے پر"
+  },
+  "modeInterval": {
+    "message": "وقفے وقفے سے"
+  },
+  "modeOnStartup": {
+    "message": "براؤزر دوبارہ شروع ہونے پر"
+  },
+  "modeHintImmediate": {
+    "message": "جیسے ہی کوئی صفحہ ہسٹری میں درج ہو۔"
+  },
+  "modeHintOnTabClose": {
+    "message": "جب وہ ٹیب بند ہو جس میں صفحہ کھولا گیا تھا۔"
+  },
+  "modeHintInterval": {
+    "message": "ٹائمر کے مطابق: ہر 1 منٹ، 5 منٹ، 10 منٹ یا 30 منٹ بعد۔"
+  },
+  "modeHintOnStartup": {
+    "message": "اگلی بار جب Chrome شروع ہو۔ Chrome بند ہوتے وقت صفائی قابلِ اعتماد طریقے سے نہیں ہو سکتی۔"
+  },
+  "timeNever": {
+    "message": "کبھی نہیں"
+  },
+  "timeJustNow": {
+    "message": "ابھی ابھی"
+  },
+  "timeMinutesAgo_one": {
+    "message": "$1 منٹ پہلے"
+  },
+  "timeMinutesAgo_other": {
+    "message": "$1 منٹ پہلے"
+  },
+  "timeHoursAgo_one": {
+    "message": "$1 گھنٹہ پہلے"
+  },
+  "timeHoursAgo_other": {
+    "message": "$1 گھنٹے پہلے"
+  },
+  "timeYesterday": {
+    "message": "کل"
+  },
+  "timeDaysAgo_one": {
+    "message": "$1 دن پہلے"
+  },
+  "timeDaysAgo_other": {
+    "message": "$1 دن پہلے"
+  },
+  "durSeconds": {
+    "message": "$1 سیکنڈ"
+  },
+  "durMinutes": {
+    "message": "$1 منٹ"
+  },
+  "countSites_one": {
+    "message": "$1 سائٹ"
+  },
+  "countSites_other": {
+    "message": "$1 سائٹس"
+  },
+  "countKeywords_one": {
+    "message": "$1 کلیدی لفظ"
+  },
+  "countKeywords_other": {
+    "message": "$1 کلیدی الفاظ"
+  },
+  "countMinutes_one": {
+    "message": "$1 منٹ"
+  },
+  "countMinutes_other": {
+    "message": "$1 منٹ"
+  },
+  "rulesHideEverything": {
+    "message": "سب کچھ چھپائیں"
+  },
+  "rulesHideAllExcept": {
+    "message": "$1 کے سوا سب چھپائیں"
+  },
+  "rulesHideOnly": {
+    "message": "صرف $1 چھپائیں"
+  },
+  "rulesHideListEmpty": {
+    "message": "چھپانے کی فہرست خالی ہے"
+  },
+  "joinPlus": {
+    "message": "$1 + $2"
+  },
+  "sumRemoved_one": {
+    "message": "$1 اندراج حذف کیا گیا۔"
+  },
+  "sumRemoved_other": {
+    "message": "$1 اندراجات حذف کیے گئے۔"
+  },
+  "sumNothingAuto": {
+    "message": "حذف کرنے کو کچھ نہیں: صفحات کھولتے ہی حذف ہو جاتے ہیں۔"
+  },
+  "sumNothingClean": {
+    "message": "حذف کرنے کو کچھ نہیں: یہ مدت پہلے ہی صاف ہے۔"
+  },
+  "sumNothing": {
+    "message": "حذف کرنے کو کچھ نہیں۔"
+  },
+  "sumKeptKeep_one": {
+    "message": "محفوظ فہرست کا $1 صفحہ برقرار ہے۔"
+  },
+  "sumKeptKeep_other": {
+    "message": "محفوظ فہرست کے $1 صفحات برقرار ہیں۔"
+  },
+  "sumKeptHide_one": {
+    "message": "چھپانے کی فہرست سے باہر کا $1 صفحہ برقرار ہے۔"
+  },
+  "sumKeptHide_other": {
+    "message": "چھپانے کی فہرست سے باہر کے $1 صفحات برقرار ہیں۔"
+  },
+  "sumSkipped_one": {
+    "message": "$1 فائل یا براؤزر صفحہ کبھی حذف نہیں ہوتا۔"
+  },
+  "sumSkipped_other": {
+    "message": "$1 فائل یا براؤزر صفحات کبھی حذف نہیں ہوتے۔"
+  },
+  "cancel": {
+    "message": "منسوخ کریں"
+  },
+  "save": {
+    "message": "محفوظ کریں"
+  },
+  "saved": {
+    "message": "محفوظ ہو گیا"
+  },
+  "add": {
+    "message": "شامل کریں"
+  },
+  "working": {
+    "message": "کام جاری ہے…"
+  },
+  "clickToConfirm": {
+    "message": "تصدیق کے لیے کلک کریں"
+  },
+  "shortcutTitle": {
+    "message": "شارٹ کٹ: $1"
+  },
+  "permissionDenied": {
+    "message": "اجازت نہیں ملی"
+  },
+  "popupToggle": {
+    "message": "خودکار ہسٹری صفائی"
+  },
+  "popupStatus": {
+    "message": "صورتحال"
+  },
+  "popupActions": {
+    "message": "کارروائیاں"
+  },
+  "stateOn": {
+    "message": "آن"
+  },
+  "stateOff": {
+    "message": "آف"
+  },
+  "popupProfile": {
+    "message": "پروفائل"
+  },
+  "popupMode": {
+    "message": "موڈ"
+  },
+  "popupRules": {
+    "message": "اصول"
+  },
+  "popupLastCleanup": {
+    "message": "آخری صفائی"
+  },
+  "popupRemovedToday": {
+    "message": "آج حذف شدہ"
+  },
+  "popupTotal": {
+    "message": "· کل $1"
+  },
+  "popupGhostActive": {
+    "message": "گھوسٹ سیشن جاری ہے · $1 شروع ہوا"
+  },
+  "popupGhostScheduled": {
+    "message": "طے شدہ گھوسٹ سیشن · $1 تک"
+  },
+  "popupStartGhost": {
+    "message": "👻 گھوسٹ سیشن شروع کریں"
+  },
+  "popupEndGhost": {
+    "message": "گھوسٹ سیشن ختم کریں"
+  },
+  "popupCleanNow": {
+    "message": "🧹 ابھی صاف کریں"
+  },
+  "popupCleanRange": {
+    "message": "مدت صاف کریں"
+  },
+  "popupRange": {
+    "message": "صاف کرنے کی مدت"
+  },
+  "rangeHour": {
+    "message": "پچھلا ایک گھنٹہ"
+  },
+  "rangeToday": {
+    "message": "آج"
+  },
+  "rangeWeek": {
+    "message": "پچھلے 7 دن"
+  },
+  "rangeAll": {
+    "message": "تمام وقت"
+  },
+  "popupSettings": {
+    "message": "⚙ ترتیبات"
+  },
+  "popupHelp": {
+    "message": "؟ مدد"
+  },
+  "popupPinPrompt": {
+    "message": "ترتیبات مقفل ہیں۔ تبدیل کرنے کے لیے اپنا پن درج کریں۔"
+  },
+  "ghostStarted": {
+    "message": "گھوسٹ سیشن شروع ہو گیا۔ آپ جو بھی کھولیں گے فوراً حذف ہو جائے گا۔"
+  },
+  "ghostEnded": {
+    "message": "گھوسٹ سیشن ختم ہو گیا۔ $1"
+  },
+  "popupThisSite": {
+    "message": "یہ سائٹ"
+  },
+  "siteKeep": {
+    "message": "رکھیں"
+  },
+  "siteStopKeeping": {
+    "message": "رکھنا بند کریں"
+  },
+  "siteHide": {
+    "message": "چھپائیں"
+  },
+  "siteStopHiding": {
+    "message": "چھپانا بند کریں"
+  },
+  "siteForget": {
+    "message": "بھلا دیں"
+  },
+  "siteKept": {
+    "message": "ہسٹری میں رہے گی: محفوظ فہرست میں ہے ($1)۔"
+  },
+  "siteGhost": {
+    "message": "کھولتے ہی حذف: گھوسٹ سیشن جاری ہے۔"
+  },
+  "siteOff": {
+    "message": "ہسٹری میں رہے گی: GhostBrowse آف ہے۔"
+  },
+  "siteStays": {
+    "message": "ہسٹری میں رہے گی: چھپانے کی فہرست یا کلیدی الفاظ میں نہیں۔"
+  },
+  "siteRemovedImmediate": {
+    "message": "کھولتے ہی ہسٹری سے حذف ہو جاتی ہے۔"
+  },
+  "siteRemovedOnTabClose": {
+    "message": "ٹیب بند ہونے پر ہسٹری سے حذف ہو جاتی ہے۔"
+  },
+  "siteRemovedInterval": {
+    "message": "ہر $1 بعد ہسٹری سے حذف ہو جاتی ہے۔"
+  },
+  "siteRemovedOnStartup": {
+    "message": "اگلی بار Chrome شروع ہونے پر ہسٹری سے حذف ہو جائے گی۔"
+  },
+  "siteKeepAdded": {
+    "message": "$1 اب ہسٹری میں رہے گی۔"
+  },
+  "siteKeepRemoved": {
+    "message": "$1 کو محفوظ فہرست سے ہٹا دیا گیا۔"
+  },
+  "siteHideAdded": {
+    "message": "$1 اب چھپائی جائے گی۔"
+  },
+  "siteHideRemoved": {
+    "message": "$1 کو چھپانے کی فہرست سے ہٹا دیا گیا۔"
+  },
+  "siteForgotten_one": {
+    "message": "$2 کا $1 اندراج حذف کیا گیا۔"
+  },
+  "siteForgotten_other": {
+    "message": "$2 کے $1 اندراجات حذف کیے گئے۔"
+  },
+  "pinPlaceholder": {
+    "message": "پن"
+  },
+  "pinUnlock": {
+    "message": "کھولیں"
+  },
+  "pinWrong_one": {
+    "message": "غلط پن۔ مختصر پابندی سے پہلے $1 کوشش باقی ہے۔"
+  },
+  "pinWrong_other": {
+    "message": "غلط پن۔ مختصر پابندی سے پہلے $1 کوششیں باقی ہیں۔"
+  },
+  "pinLockedOut": {
+    "message": "بہت زیادہ کوششیں۔ $1 بعد دوبارہ کوشش کریں۔"
+  },
+  "pinInvalid": {
+    "message": "پن 4 سے 6 ہندسوں کا ہونا چاہیے۔"
+  },
+  "optTitle": {
+    "message": "GhostBrowse ترتیبات"
+  },
+  "optTag": {
+    "message": "ترتیبات"
+  },
+  "optLanguage": {
+    "message": "زبان"
+  },
+  "languageAuto": {
+    "message": "خودکار (Chrome کی زبان)"
+  },
+  "optHelpLink": {
+    "message": "مدد اور حدود"
+  },
+  "lockTitle": {
+    "message": "ترتیبات مقفل ہیں"
+  },
+  "lockText": {
+    "message": "GhostBrowse کی ترتیبات دیکھنے اور بدلنے کے لیے اپنا پن درج کریں۔"
+  },
+  "lockHint": {
+    "message": "پن بھول گئے؟ GhostBrowse کو ہٹا کر دوبارہ انسٹال کرنے سے پن اور تمام ترتیبات ختم ہو جاتی ہیں۔"
+  },
+  "welcomeTitle": {
+    "message": "GhostBrowse میں خوش آمدید 👻"
+  },
+  "welcomeText": {
+    "message": "منتخب کریں کہ ہسٹری کب حذف ہو، پھر وہ سائٹس شامل کریں جنہیں آپ ہسٹری میں رکھنا چاہتے ہیں۔ آپ کے لاگ ان، کوکیز اور پاس ورڈز کو کبھی نہیں چھیڑا جاتا۔"
+  },
+  "welcomeDismiss": {
+    "message": "ٹھیک ہے"
+  },
+  "privacyNote": {
+    "message": "GhostBrowse کوئی نیٹ ورک درخواست نہیں بھیجتا اور سب کچھ اسی ڈیوائس پر رکھتا ہے۔"
+  },
+  "privacyLink": {
+    "message": "رازداری"
+  },
+  "limitsLink": {
+    "message": "یہ کیا نہیں کر سکتا"
+  },
+  "generalTitle": {
+    "message": "خودکار صفائی"
+  },
+  "generalSub": {
+    "message": "آف ہونے پر ہسٹری معمول کے مطابق رہتی ہے۔ ٹول بار بٹن سے “ابھی صاف کریں” اور گھوسٹ سیشن پھر بھی کام کرتے ہیں۔"
+  },
+  "generalWhen": {
+    "message": "ہسٹری کب حذف کی جائے؟"
+  },
+  "intervalLabel": {
+    "message": "صفائی کا وقفہ"
+  },
+  "toastOn": {
+    "message": "خودکار صفائی آن"
+  },
+  "toastOff": {
+    "message": "خودکار صفائی آف"
+  },
+  "rulesTitle": {
+    "message": "سائٹ کے اصول"
+  },
+  "rulesSub": {
+    "message": "ایک اصول ڈومین اور اس کے تمام ذیلی ڈومینز پر لاگو ہوتا ہے، اس لیے <code>google.com</code> میں <code>mail.google.com</code> بھی شامل ہے۔ اگر کوئی سائٹ دونوں فہرستوں میں ہو تو محفوظ فہرست کو ترجیح ملتی ہے۔"
+  },
+  "ruleModeLegend": {
+    "message": "اصول کا موڈ"
+  },
+  "ruleHideAll": {
+    "message": "محفوظ فہرست کے سوا سب کچھ چھپائیں"
+  },
+  "ruleHideAllHint": {
+    "message": "تجویز کردہ۔ صرف آپ کی درج کردہ سائٹس ہسٹری میں رہتی ہیں۔"
+  },
+  "ruleHideListed": {
+    "message": "صرف چھپانے کی فہرست چھپائیں"
+  },
+  "ruleHideListedHint": {
+    "message": "صرف آپ کی درج کردہ سائٹس اور کلیدی الفاظ حذف ہوتے ہیں۔ باقی سب رہتا ہے۔"
+  },
+  "keepTitle": {
+    "message": "محفوظ فہرست"
+  },
+  "keepSub": {
+    "message": "ہر موڈ میں ہمیشہ ہسٹری میں رہتی ہیں۔"
+  },
+  "keepPlaceholder": {
+    "message": "مثلاً gmail.com"
+  },
+  "keepAria": {
+    "message": "محفوظ فہرست میں سائٹ شامل کریں"
+  },
+  "hideTitle": {
+    "message": "چھپانے کی فہرست"
+  },
+  "hideSub": {
+    "message": "ہسٹری سے حذف کی جاتی ہیں۔"
+  },
+  "hidePlaceholder": {
+    "message": "مثلاً youtube.com"
+  },
+  "hideAria": {
+    "message": "چھپانے کی فہرست میں سائٹ شامل کریں"
+  },
+  "keywordsTitle": {
+    "message": "چھپانے کے کلیدی الفاظ"
+  },
+  "keywordsSub": {
+    "message": "جن صفحات کے پتے میں ان میں سے کوئی لفظ یا جملہ ہو، وہ کسی بھی سائٹ پر حذف کر دیے جاتے ہیں۔"
+  },
+  "keywordsPlaceholder": {
+    "message": "مثلاً salary, medical, job search"
+  },
+  "keywordsAria": {
+    "message": "چھپانے کے لیے کلیدی الفاظ شامل کریں"
+  },
+  "listInactive": {
+    "message": "ابھی استعمال میں نہیں۔ استعمال کے لیے “صرف چھپانے کی فہرست چھپائیں” منتخب کریں۔"
+  },
+  "emptySites": {
+    "message": "ابھی کوئی سائٹ نہیں۔"
+  },
+  "emptyKeywords": {
+    "message": "ابھی کوئی کلیدی لفظ نہیں۔"
+  },
+  "rulesTip": {
+    "message": "مشورہ: کئی سائٹس ایک ساتھ پیسٹ کریں، کاما یا اسپیس سے الگ کر کے۔ کلیدی الفاظ کو کاما سے الگ کریں۔ کلیدی الفاظ صفحے کے پتے سے ملائے جاتے ہیں اور چھوٹے بڑے حروف کا فرق نہیں دیکھا جاتا، اس لیے <code>job search</code> سے <code>job-search</code> اور <code>?q=job+search</code> جیسی تلاشیں بھی مل جاتی ہیں۔"
+  },
+  "invalidSites": {
+    "message": "درست سائٹ نہیں: $1۔ example.com جیسا ڈومین لکھیں۔"
+  },
+  "invalidKeywords": {
+    "message": "بہت چھوٹا یا بہت لمبا: $1۔ کلیدی الفاظ 3 سے 60 حروف کے ہونے چاہییں۔"
+  },
+  "alreadyListed": {
+    "message": "پہلے سے فہرست میں: $1۔"
+  },
+  "alsoKept": {
+    "message": "$1 محفوظ فہرست میں بھی ہے، جسے ترجیح ملتی ہے۔"
+  },
+  "toastAddedSites_one": {
+    "message": "$1 سائٹ شامل کی گئی"
+  },
+  "toastAddedSites_other": {
+    "message": "$1 سائٹس شامل کی گئیں"
+  },
+  "toastAddedKeywords_one": {
+    "message": "$1 کلیدی لفظ شامل کیا گیا"
+  },
+  "toastAddedKeywords_other": {
+    "message": "$1 کلیدی الفاظ شامل کیے گئے"
+  },
+  "removeFrom": {
+    "message": "$1 کو $2 سے ہٹائیں"
+  },
+  "removedItem": {
+    "message": "$1 ہٹا دیا گیا"
+  },
+  "profileLabel": {
+    "message": "پروفائل"
+  },
+  "profileNew": {
+    "message": "نئے پروفائل کے طور پر محفوظ کریں…"
+  },
+  "profileRename": {
+    "message": "نام بدلیں"
+  },
+  "profileDelete": {
+    "message": "حذف کریں"
+  },
+  "profileNamePlaceholder": {
+    "message": "پروفائل کا نام، مثلاً پڑھائی"
+  },
+  "profileUnsaved": {
+    "message": "(اصول کسی پروفائل میں محفوظ نہیں)"
+  },
+  "profileHintNone": {
+    "message": "پروفائلز میں اصولوں کے الگ الگ مجموعے رکھے جاتے ہیں، جیسے پڑھائی اور ذاتی، جنہیں آپ ٹول بار پاپ اپ سے بدل سکتے ہیں۔ شروع کرنے کے لیے نیچے والے اصولوں کو اپنے پہلے پروفائل کے طور پر محفوظ کریں۔"
+  },
+  "profileHintSome": {
+    "message": "نیچے اصولوں میں تبدیلیاں منتخب پروفائل میں محفوظ ہوتی ہیں۔ پروفائل یہاں سے یا ٹول بار پاپ اپ سے بدلیں۔"
+  },
+  "profileCreated": {
+    "message": "پروفائل $1 بن گیا"
+  },
+  "profileRenamed": {
+    "message": "پروفائل کا نام بدل دیا گیا"
+  },
+  "profileDeleted": {
+    "message": "پروفائل $1 حذف کر دیا گیا"
+  },
+  "profileSwitched": {
+    "message": "$1 پر منتقل ہو گئے"
+  },
+  "profileNameEmpty": {
+    "message": "پروفائل کا نام درج کریں۔"
+  },
+  "profileNameTaken": {
+    "message": "اس نام کا پروفائل پہلے سے موجود ہے۔"
+  },
+  "profileLimit": {
+    "message": "آپ زیادہ سے زیادہ 10 پروفائلز رکھ سکتے ہیں۔"
+  },
+  "profileMissing": {
+    "message": "یہ پروفائل اب موجود نہیں۔"
+  },
+  "schedTitle": {
+    "message": "طے شدہ گھوسٹ سیشن"
+  },
+  "schedSub": {
+    "message": "مقررہ اوقات میں گھوسٹ سیشن خودبخود چلائیں، مثلاً دفتر کے مشترکہ کمپیوٹر پر کام کے اوقات میں۔ سیشن کے دوران کھولی گئی ہر چیز فوراً حذف ہو جاتی ہے۔"
+  },
+  "schedDays": {
+    "message": "دن"
+  },
+  "schedFrom": {
+    "message": "شروع"
+  },
+  "schedTo": {
+    "message": "ختم"
+  },
+  "schedOff": {
+    "message": "شیڈول بند ہے۔"
+  },
+  "schedActive": {
+    "message": "طے شدہ گھوسٹ سیشن ابھی جاری ہے، $1 تک۔"
+  },
+  "schedNext": {
+    "message": "اگلا سیشن: $1، $2 – $3۔"
+  },
+  "schedNoDays": {
+    "message": "کوئی دن منتخب نہیں، اس لیے کوئی سیشن شروع نہیں ہوگا۔"
+  },
+  "schedBadTimes": {
+    "message": "شروع اور ختم کا وقت مختلف ہونا چاہیے۔"
+  },
+  "schedPickDay": {
+    "message": "کم از کم ایک دن منتخب کریں۔"
+  },
+  "extraTitle": {
+    "message": "اضافی نشانات کی صفائی"
+  },
+  "extraSub": {
+    "message": "دوسری جگہیں جو ظاہر کر سکتی ہیں کہ آپ کہاں گئے تھے۔ پہلے سے بند؛ آن کرنے پر Chrome اجازت مانگتا ہے۔"
+  },
+  "extraDownloads": {
+    "message": "ڈاؤن لوڈز کی ہسٹری"
+  },
+  "extraDownloadsHint": {
+    "message": "<code>chrome://downloads</code> سے اندراجات ہٹاتا ہے۔ ڈاؤن لوڈ کی گئی فائلیں ڈسک پر رہتی ہیں۔"
+  },
+  "extraCache": {
+    "message": "کیش"
+  },
+  "extraCacheHint": {
+    "message": "کیش فائلیں صاف کرتا ہے، جو دیکھی گئی سائٹس ظاہر کر سکتی ہیں۔ کوکیز اور لاگ ان متاثر نہیں ہوتے۔ یہ تمام سائٹس پر لاگو ہوتا ہے، صرف آپ کے اصولوں پر نہیں۔"
+  },
+  "extraRecent": {
+    "message": "حال ہی میں بند کیے گئے ٹیبز (فوری موڈ اور گھوسٹ سیشن)"
+  },
+  "extraRecentHint": {
+    "message": "بند کیے گئے ٹیبز کو Chrome کی “حالیہ ٹیبز” فہرست (ہسٹری مینو، Ctrl+Shift+T) سے بھی ہٹاتا ہے۔ دوسرے موڈز میں یہ خودبخود ہوتا ہے۔ اس موڈ میں Chrome یہ فہرست صرف حالیہ ہسٹری کے ساتھ ہی صاف کر سکتا ہے، اس لیے آپ کی محفوظ سائٹس دوبارہ شامل کر دی جاتی ہیں، اور ان کے ساتھ دیکھنے کے بجائے صفائی کا وقت دکھائی دیتا ہے۔"
+  },
+  "noteRecentOff": {
+    "message": "حال ہی میں بند کیے گئے ٹیبز کی صفائی بند رکھی گئی؛ Chrome کو اجازت دینے کے لیے اسے “اضافی نشانات کی صفائی” میں آن کریں۔"
+  },
+  "extraWhen": {
+    "message": "یہ صفائی کے وقت چلتے ہیں: ابھی صاف کریں، وقفے کی صفائی، آغاز پر صفائی، اور گھوسٹ سیشن ختم ہونے پر۔ فوری موڈ اور گھوسٹ سیشن میں مکمل ڈاؤن لوڈز بھی فوراً ہٹا دیے جاتے ہیں۔"
+  },
+  "pinTitle": {
+    "message": "ترتیبات کا تالا"
+  },
+  "pinSub": {
+    "message": "4 سے 6 ہندسوں کا پن اس صفحے اور آپ کی فہرستوں، کلیدی الفاظ اور پروفائلز کی حفاظت کرتا ہے، کیونکہ ان سے پتا چلتا ہے کہ آپ کون سی سائٹس استعمال کرتے ہیں۔ یہ مشترکہ کمپیوٹر کے عام صارفین کو روکتا ہے؛ یہ مضبوط سیکیورٹی نہیں۔"
+  },
+  "pinIsSet": {
+    "message": "🔒 پن لگا ہوا ہے۔ ترتیبات ہر بار کھلنے پر پن مانگتی ہیں۔"
+  },
+  "pinNotSet": {
+    "message": "کوئی پن نہیں لگا۔"
+  },
+  "pinSet": {
+    "message": "پن لگائیں"
+  },
+  "pinChange": {
+    "message": "پن بدلیں"
+  },
+  "pinRemove": {
+    "message": "پن ہٹائیں"
+  },
+  "pinNew": {
+    "message": "نیا پن"
+  },
+  "pinRepeat": {
+    "message": "پن دوبارہ"
+  },
+  "pinSave": {
+    "message": "پن محفوظ کریں"
+  },
+  "pinMismatch": {
+    "message": "دونوں پن ایک جیسے نہیں۔"
+  },
+  "pinSaved": {
+    "message": "پن محفوظ ہو گیا۔ اگلی بار ترتیبات کھولنے پر اس کی ضرورت ہوگی۔"
+  },
+  "pinSavedToast": {
+    "message": "پن محفوظ ہو گیا"
+  },
+  "pinRemoved": {
+    "message": "پن ہٹا دیا گیا۔ ترتیبات اب مقفل نہیں۔"
+  },
+  "pinRemovedToast": {
+    "message": "پن ہٹا دیا گیا"
+  },
+  "keysTitle": {
+    "message": "کی بورڈ شارٹ کٹس"
+  },
+  "keysSub": {
+    "message": "پاپ اپ کھولے بغیر GhostBrowse استعمال کریں۔ “ابھی صاف کریں” کے بعد ٹول بار بیج مختصر وقت کے لیے حذف شدہ اندراجات کی تعداد دکھاتا ہے۔"
+  },
+  "keysChange": {
+    "message": "شارٹ کٹس بدلیں"
+  },
+  "keysNotSet": {
+    "message": "مقرر نہیں"
+  },
+  "backupTitle": {
+    "message": "ترتیبات کا بیک اپ"
+  },
+  "backupSub": {
+    "message": "اپنی ترتیبات، فہرستیں، کلیدی الفاظ، پروفائلز اور شیڈول فائل میں محفوظ کریں، یا کسی دوسرے کمپیوٹر پر لوڈ کریں۔ فائل میں آپ کی منتخب سائٹس اور الفاظ ہوتے ہیں، اس لیے اسے نجی رکھیں۔ آپ کا پن اور اعداد و شمار کبھی شامل نہیں ہوتے۔"
+  },
+  "backupExport": {
+    "message": "فائل میں برآمد کریں"
+  },
+  "backupImport": {
+    "message": "فائل سے درآمد کریں…"
+  },
+  "backupExported": {
+    "message": "ترتیبات برآمد ہو گئیں۔ فائل میں آپ کی سائٹس اور کلیدی الفاظ ہیں، اس لیے اسے کسی نجی جگہ رکھیں۔"
+  },
+  "importQuestion": {
+    "message": "کیا موجودہ ترتیبات کی جگہ یہ فائل لگائی جائے؟"
+  },
+  "importApply": {
+    "message": "ترتیبات بدلیں"
+  },
+  "importDone": {
+    "message": "ترتیبات درآمد ہو گئیں۔"
+  },
+  "importCancelled": {
+    "message": "درآمد منسوخ۔ کچھ تبدیل نہیں ہوا۔"
+  },
+  "importSummaryOn": {
+    "message": "خودکار صفائی: آن، $1"
+  },
+  "importSummaryOff": {
+    "message": "خودکار صفائی: آف، $1"
+  },
+  "importSummaryRules": {
+    "message": "اصول: $1"
+  },
+  "importSummaryLists": {
+    "message": "محفوظ فہرست: $1 · چھپانے کی فہرست: $2 · $3"
+  },
+  "importSummaryProfiles": {
+    "message": "پروفائلز: $1"
+  },
+  "everyInterval": {
+    "message": "(ہر $1)"
+  },
+  "noteDownloadsOff": {
+    "message": "ڈاؤن لوڈز کی ہسٹری کی صفائی بند رکھی گئی؛ Chrome کو اجازت دینے کے لیے اسے “اضافی نشانات کی صفائی” میں آن کریں۔"
+  },
+  "noteCacheOff": {
+    "message": "کیش کی صفائی بند رکھی گئی؛ Chrome کو اجازت دینے کے لیے اسے “اضافی نشانات کی صفائی” میں آن کریں۔"
+  },
+  "backupTooLarge": {
+    "message": "یہ فائل GhostBrowse کی ترتیبات کی فائل ہونے کے لیے بہت بڑی ہے۔"
+  },
+  "backupNotJson": {
+    "message": "یہ فائل درست JSON نہیں۔"
+  },
+  "backupNotOurs": {
+    "message": "یہ GhostBrowse کی ترتیبات کی فائل نہیں۔"
+  },
+  "backupNewer": {
+    "message": "یہ فائل GhostBrowse کے نئے ورژن سے بنی ہے۔ GhostBrowse اپ ڈیٹ کر کے دوبارہ کوشش کریں۔"
+  },
+  "backupEmpty": {
+    "message": "فائل میں کوئی ایسی ترتیب نہیں جو GhostBrowse استعمال کر سکے۔"
+  },
+  "noteSkippedKeep_one": {
+    "message": "محفوظ فہرست کی $1 غلط سائٹ چھوڑ دی گئی۔"
+  },
+  "noteSkippedKeep_other": {
+    "message": "محفوظ فہرست کی $1 غلط سائٹس چھوڑ دی گئیں۔"
+  },
+  "noteSkippedHide_one": {
+    "message": "چھپانے کی فہرست کی $1 غلط سائٹ چھوڑ دی گئی۔"
+  },
+  "noteSkippedHide_other": {
+    "message": "چھپانے کی فہرست کی $1 غلط سائٹس چھوڑ دی گئیں۔"
+  },
+  "noteSkippedKeywords_one": {
+    "message": "$1 غلط کلیدی لفظ چھوڑ دیا گیا۔"
+  },
+  "noteSkippedKeywords_other": {
+    "message": "$1 غلط کلیدی الفاظ چھوڑ دیے گئے۔"
+  },
+  "noteSkippedProfiles_one": {
+    "message": "بغیر قابلِ استعمال نام کا $1 پروفائل چھوڑ دیا گیا۔"
+  },
+  "noteSkippedProfiles_other": {
+    "message": "بغیر قابلِ استعمال نام کے $1 پروفائلز چھوڑ دیے گئے۔"
+  },
+  "noteBadSchedule": {
+    "message": "فائل میں شیڈول درست نہیں تھا، اس لیے آپ کا موجودہ شیڈول برقرار رکھا گیا۔"
+  },
+  "statsTitle": {
+    "message": "اعداد و شمار"
+  },
+  "statsSub": {
+    "message": "صرف تعداد۔ GhostBrowse حذف کیے گئے پتے کبھی محفوظ نہیں کرتا۔"
+  },
+  "statsReset": {
+    "message": "گنتی صفر کریں"
+  },
+  "statsResetDone": {
+    "message": "گنتی صفر کر دی گئی"
+  },
+  "statsToday": {
+    "message": "آج حذف شدہ"
+  },
+  "statsTotal": {
+    "message": "کل حذف شدہ"
+  },
+  "statsLast": {
+    "message": "آخری صفائی"
+  }
+}

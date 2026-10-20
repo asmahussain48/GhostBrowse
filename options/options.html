@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n="optTitle">GhostBrowse Settings</title>
+  <link rel="icon" href="../icons/icon32.png">
+  <link rel="stylesheet" href="../styles/theme.css">
+  <link rel="stylesheet" href="options.css">
+  <script type="module" src="options.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <img src="../icons/icon48.png" width="32" height="32" alt="">
+      <span class="brand-name">GhostBrowse</span>
+      <span class="brand-tag" data-i18n="optTag"></span>
+    </div>
+    <div class="top-actions">
+      <label class="lang-picker">
+        <span data-i18n="optLanguage"></span>
+        <select id="language"></select>
+      </label>
+      <a id="helpLink" class="top-link" href="../help/help.html" data-i18n="optHelpLink"></a>
+    </div>
+  </header>
+
+  <!-- Shown instead of the settings when a PIN is set. The settings are not
+       rendered into the page until the PIN is accepted. -->
+  <section id="lock" class="lock" hidden>
+    <form id="lockForm" class="card lock-card">
+      <div class="lock-icon" aria-hidden="true">🔒</div>
+      <h1 data-i18n="lockTitle"></h1>
+      <p data-i18n="lockText"></p>
+      <input id="lockPin" type="password" inputmode="numeric" maxlength="6" autocomplete="off" data-i18n-placeholder="pinPlaceholder" data-i18n-aria-label="pinPlaceholder" dir="ltr">
+      <button id="lockSubmit" class="btn primary" type="submit" data-i18n="pinUnlock"></button>
+      <p id="lockError" class="field-msg error" role="alert"></p>
+      <p class="hint" data-i18n="lockHint"></p>
+    </form>
+  </section>
+
+  <main id="app" hidden>
+    <div id="welcome" class="banner" hidden>
+      <div>
+        <strong data-i18n="welcomeTitle"></strong>
+        <p data-i18n="welcomeText"></p>
+      </div>
+      <button id="dismissWelcome" class="btn small" data-i18n="welcomeDismiss"></button>
+    </div>
+
+    <!-- ---------- General ---------- -->
+    <section class="card" aria-labelledby="h-general">
+      <div class="card-head">
+        <div>
+          <h2 id="h-general" data-i18n="generalTitle"></h2>
+          <p class="sub" data-i18n="generalSub"></p>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="enabled" role="switch" data-i18n-aria-label="generalTitle">
+          <span class="track"><span class="thumb"></span></span>
+        </label>
+      </div>
+
+      <fieldset id="modeChoices" class="choices">
+        <legend data-i18n="generalWhen"></legend>
+      </fieldset>
+
+      <div id="intervalField" class="inline-field">
+        <label for="intervalMin" data-i18n="intervalLabel"></label>
+        <select id="intervalMin"></select>
+      </div>
+    </section>
+
+    <!-- ---------- Rules ---------- -->
+    <section class="card" aria-labelledby="h-rules">
+      <h2 id="h-rules" data-i18n="rulesTitle"></h2>
+      <p class="sub" data-i18n-rich="rulesSub"></p>
+
+      <div class="profile-bar">
+        <div class="profile-row">
+          <div id="profilePicker" class="profile-picker">
+            <label for="profileSelect" data-i18n="profileLabel"></label>
+            <select id="profileSelect"></select>
+          </div>
+          <div class="profile-actions">
+            <button id="profileNew" class="btn small" type="button" data-i18n="profileNew"></button>
+            <button id="profileRename" class="btn small quiet" type="button" data-i18n="profileRename"></button>
+            <button id="profileDelete" class="btn small danger" type="button" data-i18n="profileDelete"></button>
+          </div>
+        </div>
+        <form id="profileForm" class="profile-form" hidden>
+          <input id="profileName" type="text" maxlength="30" autocomplete="off" data-i18n-placeholder="profileNamePlaceholder" data-i18n-aria-label="profileNamePlaceholder">
+          <button class="btn small primary" type="submit" data-i18n="save"></button>
+          <button id="profileFormCancel" class="btn small quiet" type="button" data-i18n="cancel"></button>
+        </form>
+        <p id="profileHint" class="sub"></p>
+        <p id="profileMsg" class="field-msg" role="status"></p>
+      </div>
+
+      <fieldset class="choices two">
+        <legend class="sr-only" data-i18n="ruleModeLegend"></legend>
+        <label class="choice">
+          <input type="radio" name="ruleMode" value="hideAll">
+          <span><strong data-i18n="ruleHideAll"></strong><small data-i18n="ruleHideAllHint"></small></span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="ruleMode" value="hideListed">
+          <span><strong data-i18n="ruleHideListed"></strong><small data-i18n="ruleHideListedHint"></small></span>
+        </label>
+      </fieldset>
+
+      <div class="lists">
+        <div class="list-editor" data-list="keepList">
+          <div class="list-head"><h3 data-i18n="keepTitle"></h3><span class="count" data-count></span></div>
+          <p class="sub" data-i18n="keepSub"></p>
+          <form class="add-form" data-add>
+            <input type="text" data-i18n-placeholder="keepPlaceholder" data-i18n-aria-label="keepAria" autocomplete="off" spellcheck="false" dir="ltr">
+            <button class="btn" type="submit" data-i18n="add"></button>
+          </form>
+          <p class="field-msg" data-msg role="alert"></p>
+          <ul class="chips" data-items></ul>
+          <p class="empty" data-empty data-i18n="emptySites"></p>
+        </div>
+
+        <div class="list-editor" data-list="hideList">
+          <div class="list-head"><h3 data-i18n="hideTitle"></h3><span class="count" data-count></span></div>
+          <p class="sub" data-note></p>
+          <form class="add-form" data-add>
+            <input type="text" data-i18n-placeholder="hidePlaceholder" data-i18n-aria-label="hideAria" autocomplete="off" spellcheck="false" dir="ltr">
+            <button class="btn" type="submit" data-i18n="add"></button>
+          </form>
+          <p class="field-msg" data-msg role="alert"></p>
+          <ul class="chips" data-items></ul>
+          <p class="empty" data-empty data-i18n="emptySites"></p>
+        </div>
+
+        <div class="list-editor wide" data-list="keywords">
+          <div class="list-head"><h3 data-i18n="keywordsTitle"></h3><span class="count" data-count></span></div>
+          <p class="sub" data-note></p>
+          <form class="add-form" data-add>
+            <input type="text" data-i18n-placeholder="keywordsPlaceholder" data-i18n-aria-label="keywordsAria" autocomplete="off" spellcheck="false">
+            <button class="btn" type="submit" data-i18n="add"></button>
+          </form>
+          <p class="field-msg" data-msg role="alert"></p>
+          <ul class="chips" data-items></ul>
+          <p class="empty" data-empty data-i18n="emptyKeywords"></p>
+        </div>
+      </div>
+      <p class="hint" data-i18n-rich="rulesTip"></p>
+    </section>
+
+    <!-- ---------- Schedule ---------- -->
+    <section class="card" aria-labelledby="h-schedule">
+      <div class="card-head">
+        <div>
+          <h2 id="h-schedule" data-i18n="schedTitle"></h2>
+          <p class="sub" data-i18n="schedSub"></p>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="schedEnabled" role="switch" data-i18n-aria-label="schedTitle">
+          <span class="track"><span class="thumb"></span></span>
+        </label>
+      </div>
+      <div id="schedFields" class="sched-fields">
+        <fieldset class="days">
+          <legend data-i18n="schedDays"></legend>
+          <div id="schedDays" class="day-chips"></div>
+        </fieldset>
+        <div class="inline-field">
+          <label for="schedStart" data-i18n="schedFrom"></label>
+          <input type="time" id="schedStart" required dir="ltr">
+          <label for="schedEnd" data-i18n="schedTo"></label>
+          <input type="time" id="schedEnd" required dir="ltr">
+        </div>
+        <p id="schedStatus" class="hint"></p>
+        <p id="schedMsg" class="field-msg" role="alert"></p>
+      </div>
+    </section>
+
+    <!-- ---------- Extra cleaning ---------- -->
+    <section class="card" aria-labelledby="h-extra">
+      <h2 id="h-extra" data-i18n="extraTitle"></h2>
+      <p class="sub" data-i18n="extraSub"></p>
+
+      <div class="toggle-row">
+        <div>
+          <strong data-i18n="extraDownloads"></strong>
+          <p class="sub" data-i18n-rich="extraDownloadsHint"></p>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="cleanDownloads" role="switch" data-i18n-aria-label="extraDownloads">
+          <span class="track"><span class="thumb"></span></span>
+        </label>
+      </div>
+      <div class="toggle-row">
+        <div>
+          <strong data-i18n="extraCache"></strong>
+          <p class="sub" data-i18n="extraCacheHint"></p>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="cleanCache" role="switch" data-i18n-aria-label="extraCache">
+          <span class="track"><span class="thumb"></span></span>
+        </label>
+      </div>
+      <div class="toggle-row">
+        <div>
+          <strong data-i18n="extraRecent"></strong>
+          <p class="sub" data-i18n="extraRecentHint"></p>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="cleanRecentlyClosed" role="switch" data-i18n-aria-label="extraRecent">
+          <span class="track"><span class="thumb"></span></span>
+        </label>
+      </div>
+      <p class="hint" data-i18n="extraWhen"></p>
+    </section>
+
+    <!-- ---------- Security ---------- -->
+    <section class="card" aria-labelledby="h-security">
+      <h2 id="h-security" data-i18n="pinTitle"></h2>
+      <p class="sub" data-i18n="pinSub"></p>
+      <p id="pinStatus" class="pin-status"></p>
+
+      <form id="pinSetForm" class="pin-form" hidden>
+        <input id="pinNew" type="password" inputmode="numeric" maxlength="6" autocomplete="new-password" data-i18n-placeholder="pinNew" data-i18n-aria-label="pinNew" dir="ltr">
+        <input id="pinConfirm" type="password" inputmode="numeric" maxlength="6" autocomplete="new-password" data-i18n-placeholder="pinRepeat" data-i18n-aria-label="pinRepeat" dir="ltr">
+        <button class="btn primary" type="submit" data-i18n="pinSave"></button>
+        <button id="pinSetCancel" class="btn quiet" type="button" data-i18n="cancel"></button>
+      </form>
+
+      <div id="pinActions" class="row-actions">
+        <button id="pinSetOpen" class="btn" type="button"></button>
+        <button id="pinRemove" class="btn danger" type="button" data-i18n="pinRemove"></button>
+      </div>
+      <p id="pinMsg" class="field-msg" role="status"></p>
+    </section>
+
+    <!-- ---------- Keyboard shortcuts ---------- -->
+    <section class="card" aria-labelledby="h-keys">
+      <div class="card-head">
+        <div>
+          <h2 id="h-keys" data-i18n="keysTitle"></h2>
+          <p class="sub" data-i18n="keysSub"></p>
+        </div>
+        <button id="editShortcuts" class="btn small" type="button" data-i18n="keysChange"></button>
+      </div>
+      <dl id="shortcutList" class="shortcuts"></dl>
+    </section>
+
+    <!-- ---------- Backup ---------- -->
+    <section class="card" aria-labelledby="h-backup">
+      <h2 id="h-backup" data-i18n="backupTitle"></h2>
+      <p class="sub" data-i18n="backupSub"></p>
+      <div class="row-actions">
+        <button id="exportBtn" class="btn" type="button" data-i18n="backupExport"></button>
+        <button id="importBtn" class="btn" type="button" data-i18n="backupImport"></button>
+        <input id="importFile" type="file" accept=".json,application/json" hidden>
+      </div>
+      <div id="importPreview" class="import-preview" hidden>
+        <p><strong data-i18n="importQuestion"></strong></p>
+        <ul id="importSummary"></ul>
+        <div class="row-actions">
+          <button id="importApply" class="btn primary" type="button" data-i18n="importApply"></button>
+          <button id="importCancel" class="btn quiet" type="button" data-i18n="cancel"></button>
+        </div>
+      </div>
+      <p id="backupMsg" class="field-msg" role="status"></p>
+    </section>
+
+    <!-- ---------- Statistics ---------- -->
+    <section class="card" aria-labelledby="h-stats">
+      <div class="card-head">
+        <div>
+          <h2 id="h-stats" data-i18n="statsTitle"></h2>
+          <p class="sub" data-i18n="statsSub"></p>
+        </div>
+        <button id="resetStats" class="btn small quiet" type="button" data-i18n="statsReset"></button>
+      </div>
+      <dl class="stats">
+        <div><dt data-i18n="statsToday"></dt><dd id="statToday">0</dd></div>
+        <div><dt data-i18n="statsTotal"></dt><dd id="statTotal">0</dd></div>
+        <div><dt data-i18n="statsLast"></dt><dd id="statLast"></dd></div>
+      </dl>
+    </section>
+
+    <p class="privacy-note">
+      <span data-i18n="privacyNote"></span>
+      <a id="privacyLink" href="../help/help.html#privacy" data-i18n="privacyLink"></a> ·
+      <a id="limitsLink" href="../help/help.html#limits" data-i18n="limitsLink"></a>
+    </p>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

@@ -1,0 +1,151 @@
+/* Shared design tokens and controls for the popup, options, and help pages.
+   System fonts only: GhostBrowse never makes network requests. */
+
+:root {
+  color-scheme: light dark;
+  --bg: #f6f5fb;
+  --surface: #ffffff;
+  --surface-2: #f1eff8;
+  --border: #e3e0ef;
+  --text: #1d1a2b;
+  --muted: #6c6882;
+  --accent: #6246ea;
+  --accent-hover: #5236d6;
+  --accent-soft: #eeeaff;
+  --on-accent: #ffffff;
+  --ghost: #6a1b9a;
+  --ghost-soft: #f4e9fb;
+  --success: #2e7d32;
+  --success-soft: #e7f4e8;
+  --warning: #8a5a00;
+  --warning-soft: #fff4d6;
+  --danger: #c62828;
+  --danger-soft: #fdecec;
+  --radius: 10px;
+  --radius-sm: 6px;
+  --shadow: 0 1px 2px rgb(24 16 56 / 6%), 0 6px 20px rgb(24 16 56 / 6%);
+  --focus: 0 0 0 3px rgb(98 70 234 / 35%);
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #121118;
+    --surface: #1b1a24;
+    --surface-2: #24222f;
+    --border: #353242;
+    --text: #ecebf3;
+    --muted: #a19db4;
+    --accent: #7059f0;
+    --accent-hover: #826df5;
+    --accent-soft: #2a2548;
+    --on-accent: #ffffff;
+    --ghost: #c49af0;
+    --ghost-soft: #2d2140;
+    --success: #6fcf73;
+    --success-soft: #1c2e1d;
+    --warning: #e8b64c;
+    --warning-soft: #33290f;
+    --danger: #f07b7b;
+    --danger-soft: #3a1d1d;
+    --shadow: 0 1px 2px rgb(0 0 0 / 30%);
+    --focus: 0 0 0 3px rgb(140 120 255 / 45%);
+  }
+}
+
+/* Urdu: Nastaliq fonts where installed, with room for its tall letters. */
+/* Urdu interface text uses a Naskh-style font, which stays legible at small
+   sizes; Nastaliq is used for long reading on the help page. */
+:root:lang(ur) {
+  --font: "Segoe UI", "Noto Sans Arabic", "Noto Naskh Arabic", Tahoma, system-ui, sans-serif;
+  --nastaliq: "Noto Nastaliq Urdu", "Jameel Noori Nastaleeq", "Urdu Typesetting", var(--font);
+}
+:root:lang(ur) body { line-height: 1.6; }
+/* Letter spacing breaks the joins between letters in Arabic script. */
+:root:lang(ur) * { letter-spacing: normal !important; text-transform: none !important; }
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 14px/1.45 var(--font);
+  -webkit-font-smoothing: antialiased;
+}
+
+button, input, select, textarea { font: inherit; color: inherit; }
+a { color: var(--accent); }
+[hidden] { display: none !important; }
+
+:focus-visible { outline: none; box-shadow: var(--focus); }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 34px;
+  padding: 6px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--text);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color .15s, border-color .15s, opacity .15s;
+}
+.btn:hover { background: var(--surface-2); }
+.btn:disabled { opacity: .55; cursor: default; }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.btn.primary:hover:not(:disabled) { background: var(--accent-hover); border-color: var(--accent-hover); }
+.btn.danger { color: var(--danger); }
+.btn.danger:hover:not(:disabled) { background: var(--danger-soft); border-color: var(--danger); }
+.btn.quiet { background: transparent; border-color: transparent; }
+.btn.quiet:hover:not(:disabled) { background: var(--surface-2); }
+.btn.small { min-height: 28px; padding: 3px 10px; font-size: 13px; }
+
+/* ---------- Inputs ---------- */
+select, input[type="text"], input[type="password"] {
+  min-height: 34px;
+  padding: 5px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+}
+select { padding-inline-end: 6px; cursor: pointer; }
+input::placeholder { color: var(--muted); }
+input:focus-visible, select:focus-visible { border-color: var(--accent); }
+
+/* ---------- Toggle switch ---------- */
+/* Switches read the same way in both directions. */
+.switch { position: relative; display: inline-flex; align-items: center; cursor: pointer; flex: none; direction: ltr; }
+.switch input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
+.switch .track {
+  width: 40px;
+  height: 22px;
+  border-radius: 999px;
+  background: var(--border);
+  transition: background-color .15s;
+  position: relative;
+}
+.switch .thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 25%);
+  transition: transform .15s;
+}
+.switch input:checked + .track { background: var(--success); }
+.switch input:checked + .track .thumb { transform: translateX(18px); }
+.switch input:focus-visible + .track { box-shadow: var(--focus); }
+.switch input:disabled + .track { opacity: .5; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}

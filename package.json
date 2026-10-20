@@ -1,0 +1,21 @@
+{
+  "name": "ghostbrowse",
+  "version": "1.1.0",
+  "private": true,
+  "description": "Chrome extension that automatically removes browsing history while keeping you logged in.",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "icons": "node scripts/generate-icons.js",
+    "package": "node scripts/package.js",
+    "test:e2e": "node tests/e2e/e2e.js",
+    "store-assets": "node scripts/store-assets.js",
+    "test:firefox": "node tests/e2e/firefox.js"
+  },
+  "devDependencies": {
+    "puppeteer-core": "^25.15.0",
+    "vitest": "^5.0.2"
+  }
+}

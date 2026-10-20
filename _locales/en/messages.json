@@ -1,0 +1,791 @@
+{
+  "extName": {
+    "message": "GhostBrowse"
+  },
+  "extDescription": {
+    "message": "Automatically removes browsing history while keeping you logged in."
+  },
+  "cmdCleanNow": {
+    "message": "Clean Now: remove history since the last cleanup"
+  },
+  "cmdToggleGhost": {
+    "message": "Start or end a Ghost Session"
+  },
+  "badgeOn": {
+    "message": "ON"
+  },
+  "badgeOff": {
+    "message": "OFF"
+  },
+  "badgeGhost": {
+    "message": "👻"
+  },
+  "badgeOnTitle": {
+    "message": "GhostBrowse is on"
+  },
+  "badgeOffTitle": {
+    "message": "GhostBrowse is off"
+  },
+  "badgeGhostTitle": {
+    "message": "GhostBrowse: Ghost Session active"
+  },
+  "flashTitle": {
+    "message": "GhostBrowse: $1"
+  },
+  "errInvalidRange": {
+    "message": "Invalid time range."
+  },
+  "errInvalidSite": {
+    "message": "That is not a website GhostBrowse can forget."
+  },
+  "errGeneric": {
+    "message": "Something went wrong."
+  },
+  "modeImmediate": {
+    "message": "Immediately"
+  },
+  "modeOnTabClose": {
+    "message": "When tab closes"
+  },
+  "modeInterval": {
+    "message": "Interval"
+  },
+  "modeOnStartup": {
+    "message": "On browser restart"
+  },
+  "modeHintImmediate": {
+    "message": "As soon as a page is recorded in history."
+  },
+  "modeHintOnTabClose": {
+    "message": "When the tab that visited the page is closed."
+  },
+  "modeHintInterval": {
+    "message": "On a timer: every 1, 5, 10, or 30 minutes."
+  },
+  "modeHintOnStartup": {
+    "message": "The next time Chrome starts. Cleanup cannot run reliably while Chrome is closing."
+  },
+  "timeNever": {
+    "message": "Never"
+  },
+  "timeJustNow": {
+    "message": "just now"
+  },
+  "timeMinutesAgo_one": {
+    "message": "$1 min ago"
+  },
+  "timeMinutesAgo_other": {
+    "message": "$1 min ago"
+  },
+  "timeHoursAgo_one": {
+    "message": "$1 h ago"
+  },
+  "timeHoursAgo_other": {
+    "message": "$1 h ago"
+  },
+  "timeYesterday": {
+    "message": "yesterday"
+  },
+  "timeDaysAgo_one": {
+    "message": "$1 day ago"
+  },
+  "timeDaysAgo_other": {
+    "message": "$1 days ago"
+  },
+  "durSeconds": {
+    "message": "$1 s"
+  },
+  "durMinutes": {
+    "message": "$1 min"
+  },
+  "countSites_one": {
+    "message": "$1 site"
+  },
+  "countSites_other": {
+    "message": "$1 sites"
+  },
+  "countKeywords_one": {
+    "message": "$1 keyword"
+  },
+  "countKeywords_other": {
+    "message": "$1 keywords"
+  },
+  "countMinutes_one": {
+    "message": "$1 minute"
+  },
+  "countMinutes_other": {
+    "message": "$1 minutes"
+  },
+  "rulesHideEverything": {
+    "message": "Hide everything"
+  },
+  "rulesHideAllExcept": {
+    "message": "Hide all except $1"
+  },
+  "rulesHideOnly": {
+    "message": "Hide only $1"
+  },
+  "rulesHideListEmpty": {
+    "message": "Hide list is empty"
+  },
+  "joinPlus": {
+    "message": "$1 + $2"
+  },
+  "sumRemoved_one": {
+    "message": "Removed $1 entry."
+  },
+  "sumRemoved_other": {
+    "message": "Removed $1 entries."
+  },
+  "sumNothingAuto": {
+    "message": "Nothing to remove: pages are already removed as you visit them."
+  },
+  "sumNothingClean": {
+    "message": "Nothing to remove: this time range is already clean."
+  },
+  "sumNothing": {
+    "message": "Nothing to remove."
+  },
+  "sumKeptKeep_one": {
+    "message": "$1 page on your Keep list stays."
+  },
+  "sumKeptKeep_other": {
+    "message": "$1 pages on your Keep list stay."
+  },
+  "sumKeptHide_one": {
+    "message": "$1 page not on your Hide list stays."
+  },
+  "sumKeptHide_other": {
+    "message": "$1 pages not on your Hide list stay."
+  },
+  "sumSkipped_one": {
+    "message": "$1 file or browser page is never removed."
+  },
+  "sumSkipped_other": {
+    "message": "$1 file or browser pages are never removed."
+  },
+  "cancel": {
+    "message": "Cancel"
+  },
+  "save": {
+    "message": "Save"
+  },
+  "saved": {
+    "message": "Saved"
+  },
+  "add": {
+    "message": "Add"
+  },
+  "working": {
+    "message": "Working…"
+  },
+  "clickToConfirm": {
+    "message": "Click to confirm"
+  },
+  "shortcutTitle": {
+    "message": "Shortcut: $1"
+  },
+  "permissionDenied": {
+    "message": "Permission not granted"
+  },
+  "popupToggle": {
+    "message": "Automatic history removal"
+  },
+  "popupStatus": {
+    "message": "Status"
+  },
+  "popupActions": {
+    "message": "Actions"
+  },
+  "stateOn": {
+    "message": "ON"
+  },
+  "stateOff": {
+    "message": "OFF"
+  },
+  "popupProfile": {
+    "message": "Profile"
+  },
+  "popupMode": {
+    "message": "Mode"
+  },
+  "popupRules": {
+    "message": "Rules"
+  },
+  "popupLastCleanup": {
+    "message": "Last cleanup"
+  },
+  "popupRemovedToday": {
+    "message": "Removed today"
+  },
+  "popupTotal": {
+    "message": "· $1 total"
+  },
+  "popupGhostActive": {
+    "message": "Ghost Session active · started $1"
+  },
+  "popupGhostScheduled": {
+    "message": "Scheduled Ghost Session · until $1"
+  },
+  "popupStartGhost": {
+    "message": "👻 Start Ghost Session"
+  },
+  "popupEndGhost": {
+    "message": "End Ghost Session"
+  },
+  "popupCleanNow": {
+    "message": "🧹 Clean Now"
+  },
+  "popupCleanRange": {
+    "message": "Clean range"
+  },
+  "popupRange": {
+    "message": "Time range to clean"
+  },
+  "rangeHour": {
+    "message": "Last hour"
+  },
+  "rangeToday": {
+    "message": "Today"
+  },
+  "rangeWeek": {
+    "message": "Last 7 days"
+  },
+  "rangeAll": {
+    "message": "All time"
+  },
+  "popupSettings": {
+    "message": "⚙ Settings"
+  },
+  "popupHelp": {
+    "message": "? Help"
+  },
+  "popupPinPrompt": {
+    "message": "Settings are locked. Enter your PIN to change them."
+  },
+  "ghostStarted": {
+    "message": "Ghost Session started. Everything you visit is removed right away."
+  },
+  "ghostEnded": {
+    "message": "Ghost Session ended. $1"
+  },
+  "popupThisSite": {
+    "message": "This site"
+  },
+  "siteKeep": {
+    "message": "Keep"
+  },
+  "siteStopKeeping": {
+    "message": "Stop keeping"
+  },
+  "siteHide": {
+    "message": "Hide"
+  },
+  "siteStopHiding": {
+    "message": "Stop hiding"
+  },
+  "siteForget": {
+    "message": "Forget"
+  },
+  "siteKept": {
+    "message": "Stays in history: on your Keep list ($1)."
+  },
+  "siteGhost": {
+    "message": "Removed as you visit: a Ghost Session is on."
+  },
+  "siteOff": {
+    "message": "Stays in history: GhostBrowse is off."
+  },
+  "siteStays": {
+    "message": "Stays in history: not on your Hide list or keywords."
+  },
+  "siteRemovedImmediate": {
+    "message": "Removed from history as you visit."
+  },
+  "siteRemovedOnTabClose": {
+    "message": "Removed from history when its tab closes."
+  },
+  "siteRemovedInterval": {
+    "message": "Removed from history every $1."
+  },
+  "siteRemovedOnStartup": {
+    "message": "Removed from history the next time Chrome starts."
+  },
+  "siteKeepAdded": {
+    "message": "$1 now stays in history."
+  },
+  "siteKeepRemoved": {
+    "message": "Removed $1 from the Keep list."
+  },
+  "siteHideAdded": {
+    "message": "$1 is now hidden."
+  },
+  "siteHideRemoved": {
+    "message": "Removed $1 from the Hide list."
+  },
+  "siteForgotten_one": {
+    "message": "Removed $1 entry for $2."
+  },
+  "siteForgotten_other": {
+    "message": "Removed $1 entries for $2."
+  },
+  "pinPlaceholder": {
+    "message": "PIN"
+  },
+  "pinUnlock": {
+    "message": "Unlock"
+  },
+  "pinWrong_one": {
+    "message": "Wrong PIN. $1 try left before a short lockout."
+  },
+  "pinWrong_other": {
+    "message": "Wrong PIN. $1 tries left before a short lockout."
+  },
+  "pinLockedOut": {
+    "message": "Too many attempts. Try again in $1."
+  },
+  "pinInvalid": {
+    "message": "The PIN must be 4 to 6 digits."
+  },
+  "optTitle": {
+    "message": "GhostBrowse Settings"
+  },
+  "optTag": {
+    "message": "Settings"
+  },
+  "optLanguage": {
+    "message": "Language"
+  },
+  "languageAuto": {
+    "message": "Automatic (Chrome's language)"
+  },
+  "optHelpLink": {
+    "message": "Help & limitations"
+  },
+  "lockTitle": {
+    "message": "Settings are locked"
+  },
+  "lockText": {
+    "message": "Enter your PIN to view and change GhostBrowse settings."
+  },
+  "lockHint": {
+    "message": "Forgot your PIN? Removing and reinstalling GhostBrowse clears it, along with all settings."
+  },
+  "welcomeTitle": {
+    "message": "Welcome to GhostBrowse 👻"
+  },
+  "welcomeText": {
+    "message": "Pick when history should be removed, then add the sites you want to keep in history. Your logins, cookies and passwords are never touched."
+  },
+  "welcomeDismiss": {
+    "message": "Got it"
+  },
+  "privacyNote": {
+    "message": "GhostBrowse makes no network requests and keeps everything on this device."
+  },
+  "privacyLink": {
+    "message": "Privacy"
+  },
+  "limitsLink": {
+    "message": "What it cannot do"
+  },
+  "generalTitle": {
+    "message": "Automatic removal"
+  },
+  "generalSub": {
+    "message": "When off, history is kept normally. Clean Now and Ghost Session still work from the toolbar button."
+  },
+  "generalWhen": {
+    "message": "When should history be removed?"
+  },
+  "intervalLabel": {
+    "message": "Clean every"
+  },
+  "toastOn": {
+    "message": "Automatic removal on"
+  },
+  "toastOff": {
+    "message": "Automatic removal off"
+  },
+  "rulesTitle": {
+    "message": "Site rules"
+  },
+  "rulesSub": {
+    "message": "A rule covers the domain and all its subdomains, so <code>google.com</code> also covers <code>mail.google.com</code>. If a site is on both lists, the Keep list wins."
+  },
+  "ruleModeLegend": {
+    "message": "Rule mode"
+  },
+  "ruleHideAll": {
+    "message": "Hide everything, except the Keep list"
+  },
+  "ruleHideAllHint": {
+    "message": "Recommended. Only sites you list stay in history."
+  },
+  "ruleHideListed": {
+    "message": "Hide only the Hide list"
+  },
+  "ruleHideListedHint": {
+    "message": "Only sites and keywords you list are removed. Everything else stays."
+  },
+  "keepTitle": {
+    "message": "Keep list"
+  },
+  "keepSub": {
+    "message": "Always stays in history, in every mode."
+  },
+  "keepPlaceholder": {
+    "message": "e.g. gmail.com"
+  },
+  "keepAria": {
+    "message": "Add a site to the Keep list"
+  },
+  "hideTitle": {
+    "message": "Hide list"
+  },
+  "hideSub": {
+    "message": "Removed from history."
+  },
+  "hidePlaceholder": {
+    "message": "e.g. youtube.com"
+  },
+  "hideAria": {
+    "message": "Add a site to the Hide list"
+  },
+  "keywordsTitle": {
+    "message": "Hide keywords"
+  },
+  "keywordsSub": {
+    "message": "Pages whose address contains one of these words or phrases are removed, on any site."
+  },
+  "keywordsPlaceholder": {
+    "message": "e.g. salary, medical, job search"
+  },
+  "keywordsAria": {
+    "message": "Add keywords to hide"
+  },
+  "listInactive": {
+    "message": "Not used right now. Switch to “Hide only the Hide list” to use it."
+  },
+  "emptySites": {
+    "message": "No sites yet."
+  },
+  "emptyKeywords": {
+    "message": "No keywords yet."
+  },
+  "rulesTip": {
+    "message": "Tip: paste several sites at once, separated by commas or spaces. Separate keywords with commas. Keywords match the page address, ignoring case, so <code>job search</code> also matches <code>job-search</code> and search queries like <code>?q=job+search</code>."
+  },
+  "invalidSites": {
+    "message": "Not a valid site: $1. Use a domain like example.com."
+  },
+  "invalidKeywords": {
+    "message": "Too short or too long: $1. Keywords need 3 to 60 characters."
+  },
+  "alreadyListed": {
+    "message": "Already listed: $1."
+  },
+  "alsoKept": {
+    "message": "$1 is also on the Keep list, which wins."
+  },
+  "toastAddedSites_one": {
+    "message": "Added $1 site"
+  },
+  "toastAddedSites_other": {
+    "message": "Added $1 sites"
+  },
+  "toastAddedKeywords_one": {
+    "message": "Added $1 keyword"
+  },
+  "toastAddedKeywords_other": {
+    "message": "Added $1 keywords"
+  },
+  "removeFrom": {
+    "message": "Remove $1 from $2"
+  },
+  "removedItem": {
+    "message": "Removed $1"
+  },
+  "profileLabel": {
+    "message": "Profile"
+  },
+  "profileNew": {
+    "message": "Save as new profile…"
+  },
+  "profileRename": {
+    "message": "Rename"
+  },
+  "profileDelete": {
+    "message": "Delete"
+  },
+  "profileNamePlaceholder": {
+    "message": "Profile name, e.g. Study"
+  },
+  "profileUnsaved": {
+    "message": "(rules not saved to a profile)"
+  },
+  "profileHintNone": {
+    "message": "Profiles keep separate sets of rules, such as Study and Personal, that you can switch between from the toolbar popup. Save the rules below as your first profile to start."
+  },
+  "profileHintSome": {
+    "message": "Changes to the rules below are saved to the selected profile. Switch profiles here or from the toolbar popup."
+  },
+  "profileCreated": {
+    "message": "Profile $1 created"
+  },
+  "profileRenamed": {
+    "message": "Profile renamed"
+  },
+  "profileDeleted": {
+    "message": "Profile $1 deleted"
+  },
+  "profileSwitched": {
+    "message": "Switched to $1"
+  },
+  "profileNameEmpty": {
+    "message": "Enter a name for the profile."
+  },
+  "profileNameTaken": {
+    "message": "A profile with that name already exists."
+  },
+  "profileLimit": {
+    "message": "You can have up to 10 profiles."
+  },
+  "profileMissing": {
+    "message": "That profile no longer exists."
+  },
+  "schedTitle": {
+    "message": "Scheduled Ghost Session"
+  },
+  "schedSub": {
+    "message": "Run a Ghost Session automatically at set times, for example on a shared office computer during work hours. Everything visited during the session is removed right away."
+  },
+  "schedDays": {
+    "message": "Days"
+  },
+  "schedFrom": {
+    "message": "From"
+  },
+  "schedTo": {
+    "message": "to"
+  },
+  "schedOff": {
+    "message": "The schedule is off."
+  },
+  "schedActive": {
+    "message": "A scheduled Ghost Session is running now, until $1."
+  },
+  "schedNext": {
+    "message": "Next session: $1, $2 – $3."
+  },
+  "schedNoDays": {
+    "message": "No days selected, so no session will start."
+  },
+  "schedBadTimes": {
+    "message": "The start and end time must be different."
+  },
+  "schedPickDay": {
+    "message": "Pick at least one day."
+  },
+  "extraTitle": {
+    "message": "Extra trace cleaning"
+  },
+  "extraSub": {
+    "message": "Other places that can reveal where you have been. Off by default; Chrome asks for permission when you turn one on."
+  },
+  "extraDownloads": {
+    "message": "Download history"
+  },
+  "extraDownloadsHint": {
+    "message": "Removes entries from <code>chrome://downloads</code>. The downloaded files stay on disk."
+  },
+  "extraCache": {
+    "message": "Cache"
+  },
+  "extraCacheHint": {
+    "message": "Clears cached files, which can reveal visited sites. Cookies and logins are not affected. Applies to all sites, not just your rules."
+  },
+  "extraRecent": {
+    "message": "Recently closed tabs (Immediately mode and Ghost Sessions)"
+  },
+  "extraRecentHint": {
+    "message": "Also removes closed tabs from Chrome's “Recent tabs” list (History menu, Ctrl+Shift+T). In the other modes this happens automatically. Here Chrome can only clear the list together with recent history, so the sites you keep are added back, showing the time of the cleanup instead of when you visited."
+  },
+  "noteRecentOff": {
+    "message": "Recently closed tabs cleaning was left off; turn it on under Extra trace cleaning to give Chrome's permission."
+  },
+  "extraWhen": {
+    "message": "These run during cleanups: Clean Now, interval cleanups, startup cleanup, and when a Ghost Session ends. In Immediate mode and during a Ghost Session, finished downloads are also removed right away."
+  },
+  "pinTitle": {
+    "message": "Settings lock"
+  },
+  "pinSub": {
+    "message": "A 4–6 digit PIN protects this page and your lists, keywords and profiles, since they show which sites you use. It deters casual users of a shared computer; it is not strong security."
+  },
+  "pinIsSet": {
+    "message": "🔒 A PIN is set. Settings ask for it each time they are opened."
+  },
+  "pinNotSet": {
+    "message": "No PIN set."
+  },
+  "pinSet": {
+    "message": "Set PIN"
+  },
+  "pinChange": {
+    "message": "Change PIN"
+  },
+  "pinRemove": {
+    "message": "Remove PIN"
+  },
+  "pinNew": {
+    "message": "New PIN"
+  },
+  "pinRepeat": {
+    "message": "Repeat PIN"
+  },
+  "pinSave": {
+    "message": "Save PIN"
+  },
+  "pinMismatch": {
+    "message": "The two PINs do not match."
+  },
+  "pinSaved": {
+    "message": "PIN saved. You will need it the next time you open Settings."
+  },
+  "pinSavedToast": {
+    "message": "PIN saved"
+  },
+  "pinRemoved": {
+    "message": "PIN removed. Settings are no longer locked."
+  },
+  "pinRemovedToast": {
+    "message": "PIN removed"
+  },
+  "keysTitle": {
+    "message": "Keyboard shortcuts"
+  },
+  "keysSub": {
+    "message": "Use GhostBrowse without opening the popup. After Clean Now, the toolbar badge briefly shows how many entries were removed."
+  },
+  "keysChange": {
+    "message": "Change shortcuts"
+  },
+  "keysNotSet": {
+    "message": "Not set"
+  },
+  "backupTitle": {
+    "message": "Back up settings"
+  },
+  "backupSub": {
+    "message": "Save your settings, lists, keywords, profiles and schedule to a file, or load them on another computer. The file shows the sites and words you chose, so keep it private. Your PIN and statistics are never included."
+  },
+  "backupExport": {
+    "message": "Export to file"
+  },
+  "backupImport": {
+    "message": "Import from file…"
+  },
+  "backupExported": {
+    "message": "Settings exported. The file lists your sites and keywords, so keep it somewhere private."
+  },
+  "importQuestion": {
+    "message": "Replace your current settings with this file?"
+  },
+  "importApply": {
+    "message": "Replace settings"
+  },
+  "importDone": {
+    "message": "Settings imported."
+  },
+  "importCancelled": {
+    "message": "Import cancelled. Nothing was changed."
+  },
+  "importSummaryOn": {
+    "message": "Automatic removal: on, $1"
+  },
+  "importSummaryOff": {
+    "message": "Automatic removal: off, $1"
+  },
+  "importSummaryRules": {
+    "message": "Rules: $1"
+  },
+  "importSummaryLists": {
+    "message": "Keep list: $1 · Hide list: $2 · $3"
+  },
+  "importSummaryProfiles": {
+    "message": "Profiles: $1"
+  },
+  "everyInterval": {
+    "message": "(every $1)"
+  },
+  "noteDownloadsOff": {
+    "message": "Download history cleaning was left off; turn it on under Extra trace cleaning to give Chrome's permission."
+  },
+  "noteCacheOff": {
+    "message": "Cache cleaning was left off; turn it on under Extra trace cleaning to give Chrome's permission."
+  },
+  "backupTooLarge": {
+    "message": "This file is too large to be a GhostBrowse settings file."
+  },
+  "backupNotJson": {
+    "message": "This file is not valid JSON."
+  },
+  "backupNotOurs": {
+    "message": "This is not a GhostBrowse settings file."
+  },
+  "backupNewer": {
+    "message": "This file was made by a newer version of GhostBrowse. Update GhostBrowse and try again."
+  },
+  "backupEmpty": {
+    "message": "The file does not contain any settings GhostBrowse can use."
+  },
+  "noteSkippedKeep_one": {
+    "message": "Skipped $1 invalid site from the Keep list."
+  },
+  "noteSkippedKeep_other": {
+    "message": "Skipped $1 invalid sites from the Keep list."
+  },
+  "noteSkippedHide_one": {
+    "message": "Skipped $1 invalid site from the Hide list."
+  },
+  "noteSkippedHide_other": {
+    "message": "Skipped $1 invalid sites from the Hide list."
+  },
+  "noteSkippedKeywords_one": {
+    "message": "Skipped $1 invalid keyword from the keyword list."
+  },
+  "noteSkippedKeywords_other": {
+    "message": "Skipped $1 invalid keywords from the keyword list."
+  },
+  "noteSkippedProfiles_one": {
+    "message": "Skipped $1 profile without a usable name."
+  },
+  "noteSkippedProfiles_other": {
+    "message": "Skipped $1 profiles without a usable name."
+  },
+  "noteBadSchedule": {
+    "message": "The schedule in the file was not valid, so your current schedule was kept."
+  },
+  "statsTitle": {
+    "message": "Statistics"
+  },
+  "statsSub": {
+    "message": "Counts only. GhostBrowse never stores the addresses it removes."
+  },
+  "statsReset": {
+    "message": "Reset counters"
+  },
+  "statsResetDone": {
+    "message": "Counters reset"
+  },
+  "statsToday": {
+    "message": "Removed today"
+  },
+  "statsTotal": {
+    "message": "Removed in total"
+  },
+  "statsLast": {
+    "message": "Last cleanup"
+  }
+}
